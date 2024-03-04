@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# EstateEase Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -273,43 +273,40 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* Residential Property Real Estate Listing Agent in Singapore
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: EstateEase simplifies residential property management for real estate listing agents in Singapore. With intuitive tools for listing and client communication, the app is tailored for efficiency. Agents can quickly access contacts and prioritize them, ensuring swift connections with clients.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​           | I want to …​                                                 | So that I can…​                                                              |
+|----------|-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------|
+| `* * *`  | real estate agent | add home-owners                                              | keep track of their contact details and the properties that they are selling |
+| `* * *`  | real estate agent | view a list of all contacts stored, along with their details | quickly find the contact I need                                              |
+| `* * *`  | real estate agent | delete contacts                                              | remove outdated or irrelevant contacts                                       |
+| `* *`    | real estate agent | be able to import my existing contact and address data       | seamlessly transition to using EstateEase                                    |
+| `* *`    | real estate agent | save any changes or updates made to the contact details      | ensure that my data is always up-to-date                                     |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `EstateEase` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC03 - Delete a person**
 
-**MSS**
+**MSS:**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  EstateEase shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  EstateEase deletes the person
 
     Use case ends.
 
@@ -321,9 +318,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. EstateEase shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: UC05 - Save to storage**
+
+**Actor: EstateEase**
+
+**Preconditions: The user initiates an add or delete command**
+
+**MSS:**
+
+1.  EstateEase processes the add (UC01) or delete (UC03) command and updates the address book accordingly.
+2.  EstateEase attempts to update the JSON file accordingly.
+3.  EstateEase successfully updates the JSON file.
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. EstateEase is unable to write to the JSON file due to file permission issue.
+  * 2a1. EstateEase shows error message regarding the insufficient file permission to the user.
+
+    Use case ends.
+  
+* 2b. EstateEase is unable to write to the JSON file due to some IOException.
+    * 2b1. EstateEase shows error message regarding the IOException to the user.
+      Use case ends.
+
 
 *{More to be added}*
 
