@@ -40,6 +40,7 @@ public class UniquePersonListTest {
 
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+        // TODO: For v1.3, add in Buyer
         uniquePersonList.add(ALICE_SELLER);
         Person editedAlice = new SellerBuilder(ALICE_SELLER).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -83,6 +84,7 @@ public class UniquePersonListTest {
 
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
+        // TODO: do for buyer as well
         uniquePersonList.add(ALICE_SELLER);
         Person editedAlice = new SellerBuilder(ALICE_SELLER).withTags(VALID_TAG_HUSBAND)
                 .build();

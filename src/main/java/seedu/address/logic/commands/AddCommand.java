@@ -19,22 +19,22 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a seller to the address book.
+ * Adds a person to the address book. Currently obsolete
  */
-public class AddSellerCommand extends Command {
+public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "addseller";
+    public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_HOUSING_TYPE + "HOUSINGTYPE "
+            + PREFIX_HOUSING_TYPE + "HOUSINGTYPE"
             + PREFIX_STREET + "STREET "
             + PREFIX_BLOCK + "BLOCK "
             + PREFIX_LEVEL + "LEVEL "
-            + PREFIX_UNITNUMBER + "UNIT NUMBER "
+            + PREFIX_UNITNUMBER + "UNITNUMBER "
             + PREFIX_POSTALCODE + "POSTAL CODE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -48,38 +48,31 @@ public class AddSellerCommand extends Command {
             + PREFIX_UNITNUMBER + "25 "
             + PREFIX_POSTALCODE + "578578 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney ";
+            + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New seller added= %1$s";
-    public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in EstateEase";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person sellerToAdd;
+    private final Person toAdd;
 
     /**
-     * Creates an AddSellerCommand to add the specified {@code Seller}
+     * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddSellerCommand(Person person) {
+    public AddCommand(Person person) {
         requireNonNull(person);
-        sellerToAdd = person;
+        toAdd = person;
     }
 
-    /**
-     * Executes the command and returns the result message.
-     *
-     * @param model {@code Model} which the command should operate on.
-     * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(sellerToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SELLER);
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(sellerToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(sellerToAdd)));
+        model.addPerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
@@ -89,18 +82,18 @@ public class AddSellerCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddSellerCommand)) {
+        if (!(other instanceof AddCommand)) {
             return false;
         }
 
-        AddSellerCommand otherAddCommand = (AddSellerCommand) other;
-        return sellerToAdd.equals(otherAddCommand.sellerToAdd);
+        AddCommand otherAddCommand = (AddCommand) other;
+        return toAdd.equals(otherAddCommand.toAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("sellerToAdd", sellerToAdd)
+                .add("toAdd", toAdd)
                 .toString();
     }
 }

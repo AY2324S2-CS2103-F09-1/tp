@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSINGTYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -49,7 +49,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHousingType(VALID_HOUSINGTYPE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHousingType(VALID_HOUSING_TYPE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

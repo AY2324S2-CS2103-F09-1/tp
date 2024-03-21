@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import java.util.Set;
 
-import seedu.address.model.house.House;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -10,35 +10,27 @@ import seedu.address.model.tag.Tag;
  */
 public class Buyer extends Person {
 
-    /** The house associated with the buyer. */
-    private final House house;
-
     /**
      * Constructs a new Buyer instance without specifying a house. Default constructor.
      *
      * @param name        The name of the buyer.
      * @param phone       The phone number of the buyer.
      * @param email       The email address of the buyer.
-     * @param housingtype The type of housing the buyer wants.
+     * @param housingType The type of housing the buyer wants.
      * @param tags        The tags associated with the buyer.
      */
-    public Buyer(Name name, Phone phone, Email email, String housingtype, Set<Tag> tags) {
-        super(name, phone, email, housingtype, tags);
-        this.house = null;
+    public Buyer(Name name, Phone phone, Email email, String housingType, Set<Tag> tags) {
+        super(name, phone, email, housingType, tags);
     }
 
-    /**
-     * Constructs a new Buyer instance with a specified house. Meant for potential future Purchase methods.
-     *
-     * @param name        The name of the buyer.
-     * @param phone       The phone number of the buyer.
-     * @param email       The email address of the buyer.
-     * @param housingtype The type of housing the buyer wants.
-     * @param house       The house associated with the buyer.
-     * @param tags        The tags associated with the buyer.
-     */
-    public Buyer(Name name, Phone phone, Email email, String housingtype, House house, Set<Tag> tags) {
-        super(name, phone, email, housingtype, tags);
-        this.house = house;
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", super.getName())
+                .add("phone", super.getPhone())
+                .add("email", super.getEmail())
+                .add("housing type", super.getHousingType())
+                .add("tags", super.getTags())
+                .toString();
     }
 }

@@ -5,73 +5,65 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE_SELLER;
+import static seedu.address.testutil.TypicalPersons.ALI;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
-import seedu.address.testutil.SellerBuilder;
+import seedu.address.testutil.BuyerBuilder;
 
-class AddSellerCommandTest {
+public class AddBuyerCommandTest {
 
     @Test
-    public void constructor_nullSeller_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddSellerCommand(null));
+    public void constructor_nullBuyer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddBuyerCommand(null));
     }
 
-    // My format is somewhere wrong, but value is correct
-    /*
-    expected: <New seller added= seedu.address.model.person.Seller{name=Amy Bee, phone=85355255, email=amy@gmail.com,
-    housingType=HDB, tags=[]}> but was: <New seller added= Amy Bee; Phone= 85355255; Email= amy@gmail.com;
-    Housing Type= HDB; Tags= >
-     */
-    /*@Test
-    public void execute_sellerAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingSellerAdded modelStub = new ModelStubAcceptingSellerAdded();
-        Seller validSeller = new SellerBuilder().build();
+    @Test
+    public void execute_buyerAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingBuyerAdded modelStub = new ModelStubAcceptingBuyerAdded();
+        Person validBuyer = new BuyerBuilder().build();
 
-        CommandResult commandResult = new AddSellerCommand(validSeller).execute(modelStub);
+        CommandResult commandResult = new AddBuyerCommand(validBuyer).execute(modelStub);
 
-        assertEquals(String.format(AddSellerCommand.MESSAGE_SUCCESS, validSeller),
+        assertEquals(String.format(AddBuyerCommand.MESSAGE_SUCCESS, Messages.format(validBuyer)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validSeller), modelStub.sellersAdded);
-    }*/
-
-
-    @Test
-    public void execute_duplicateSeller_throwsCommandException() {
-        Seller validSeller = new SellerBuilder().build();
-        AddSellerCommand addSellerCommand = new AddSellerCommand(validSeller);
-        ModelStub modelStub = new ModelStubWithSeller(validSeller);
-
-        assertThrows(CommandException.class,
-                AddSellerCommand.MESSAGE_DUPLICATE_SELLER, () -> addSellerCommand.execute(modelStub));
+        assertEquals(Arrays.asList(validBuyer), modelStub.buyersAdded);
     }
 
+    @Test
+    public void execute_duplicatePerson_throwsCommandException() {
+        Person validPerson = new BuyerBuilder().build();
+        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithBuyer(validPerson);
+        assertThrows(CommandException.class, AddBuyerCommand.MESSAGE_DUPLICATE_BUYER, () ->
+                addBuyerCommand.execute(modelStub));
+    }
     @Test
     public void equals() {
-        Seller alice = new SellerBuilder().withName("Alice").build();
-        Seller bob = new SellerBuilder().withName("Bob").build();
-        AddSellerCommand addAliceCommand = new AddSellerCommand(alice);
-        AddSellerCommand addBobCommand = new AddSellerCommand(bob);
+        Person ali = new BuyerBuilder().withName("Ali").build();
+        Person bob = new BuyerBuilder().withName("Bob").build();
+        AddBuyerCommand addAliceCommand = new AddBuyerCommand(ali);
+        AddBuyerCommand addBobCommand = new AddBuyerCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddSellerCommand addAliceCommandCopy = new AddSellerCommand(alice);
+        AddBuyerCommand addAliceCommandCopy = new AddBuyerCommand(ali);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -86,9 +78,9 @@ class AddSellerCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddSellerCommand addCommand = new AddSellerCommand(ALICE_SELLER);
-        String expected = AddSellerCommand.class.getCanonicalName() + "{sellerToAdd=" + ALICE_SELLER + "}";
-        assertEquals(expected, addCommand.toString());
+        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(ALI);
+        String expected = AddBuyerCommand.class.getCanonicalName() + "{buyerToAdd=" + ALI + "}";
+        assertEquals(expected, addBuyerCommand.toString());
     }
 
     /**
@@ -126,7 +118,7 @@ class AddSellerCommandTest {
         }
 
         @Override
-        public void addPerson(Person seller) {
+        public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -141,7 +133,7 @@ class AddSellerCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person seller) {
+        public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -151,7 +143,7 @@ class AddSellerCommandTest {
         }
 
         @Override
-        public void setPerson(Person target, Person editedSeller) {
+        public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -166,39 +158,42 @@ class AddSellerCommandTest {
         }
     }
 
-    /**
-     * A Model stub that contains a single seller.
-     */
-    private class ModelStubWithSeller extends ModelStub {
-        private final Seller seller;
 
-        ModelStubWithSeller(Seller seller) {
-            requireNonNull(seller);
-            this.seller = seller;
+    /**
+     * A Model stub that contains a single person.
+     */
+    private class ModelStubWithBuyer extends ModelStub {
+        private final Person buyer;
+
+        ModelStubWithBuyer(Person person) {
+            requireNonNull(person);
+            this.buyer = person;
         }
 
         @Override
-        public boolean hasPerson(Person seller) {
-            requireNonNull(seller);
-            return this.seller.equals(seller);
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return this.buyer.isSamePerson(person);
         }
     }
 
+
     /**
-     * A Model stub that always accept the seller being added.
+     * A Model stub that always accept the buyer being added.
      */
-    private class ModelStubAcceptingSellerAdded extends ModelStub {
-        final ArrayList<Person> sellersAdded = new ArrayList<>();
+    private class ModelStubAcceptingBuyerAdded extends ModelStub {
+        final ArrayList<Person> buyersAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person seller) {
-            requireNonNull(seller);
-            return sellersAdded.contains(seller);
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return buyersAdded.stream().anyMatch(person::isSamePerson);
         }
 
-        public void addPerson(Person seller) {
-            requireNonNull(seller);
-            sellersAdded.add(seller);
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            buyersAdded.add(person);
         }
 
         @Override

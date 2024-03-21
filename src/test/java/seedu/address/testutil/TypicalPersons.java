@@ -2,9 +2,10 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSINGTYPE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSINGTYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -77,14 +78,34 @@ public class TypicalPersons {
 
     // Manually added - Seller's details found in {@code CommandTestUtil}
     public static final Seller AMY_SELLER = new SellerBuilder().withName(VALID_NAME_AMY)
-            .withHousingType(VALID_HOUSINGTYPE_AMY).withEmail(VALID_EMAIL_AMY)
+            .withHousingType(VALID_HOUSING_TYPE_AMY).withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withTags(VALID_TAG_FRIEND).withHouses(HOUSE2).build();
 
     public static final Seller BOB_SELLER = new SellerBuilder().withName(VALID_NAME_BOB)
-            .withHousingType(VALID_HOUSINGTYPE_BOB).withEmail(VALID_EMAIL_BOB)
+            .withHousingType(VALID_HOUSING_TYPE_BOB).withEmail(VALID_EMAIL_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withHouses(HOUSE3).build();
+
+    public static final Person ALI = new BuyerBuilder().withName("Ali York")
+            .withPhone("82937163").withEmail("ali@gmail.com").withHousingType("HDB").withTags("friends").build();
+    public static final Person BEN = new BuyerBuilder().withName(VALID_NAME_BEN).withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .build();
+    // Manually added - Person's details found in {@code CommandTestUtil}
+
+    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withEmail("alice@example.com")
+            .withPhone("94351253").withHousingType(VALID_HOUSING_TYPE_AMY)
+            .withTags("friends").build();
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .build();
+
+
+
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
