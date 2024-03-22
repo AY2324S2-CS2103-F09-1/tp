@@ -22,6 +22,7 @@ Class PostalCode
 Class Street
 Class Level
 Class UnitNumber
+Class Block
 Class Buyer extends Person
 Class Seller extends Person
 Class House
@@ -53,6 +54,8 @@ House *--> PostalCode
 House *--> UnitNumber
 House *--> Street
 Seller *--> House
+NonLanded *--> Block
+NonLanded *--> Level
 
 
 
