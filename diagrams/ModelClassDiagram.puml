@@ -24,6 +24,9 @@ Class Level
 Class UnitNumber
 Class Buyer extends Person
 Class Seller extends Person
+Class House
+Class Landed extends House
+Class NonLanded extends House
 
 Class I #FFFFFF
 }
@@ -48,13 +51,13 @@ Person *--> Email
 'add shit here
 Person *--> "*" Tag
 
-Seller *--> PostalCode
-Seller *--> Street
+
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
+
 
 ModelManager --> "~* filtered" Person
 @enduml
