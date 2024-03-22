@@ -20,6 +20,8 @@ Class Phone
 Class Tag
 Class PostalCode
 Class Street
+Class Level
+Class UnitNumber
 Class Buyer extends Person
 Class Seller extends Person
 
@@ -45,6 +47,9 @@ Person *--> Phone
 Person *--> Email
 'add shit here
 Person *--> "*" Tag
+
+Seller *--> PostalCode
+Seller *--> Street
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
