@@ -48,8 +48,12 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-'add shit here
 Person *--> "*" Tag
+House *--> PostalCode
+House *--> UnitNumber
+House *--> Street
+Seller *--> House
+
 
 
 
