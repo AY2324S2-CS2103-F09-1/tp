@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+end box
+
+[-> Model : addSeller(seller)
+activate Model
+
+Model -> Model : hasPerson(seller)
+activate Model
+alt person exists
+    Model --> Model : true
+    [<- Model : "Person cannot be added"
+else person does not exist
+    Model --> Model : false
+    deactivate Model
+
+    Model -> VersionedAddressBook : addPerson(seller)
+    activate VersionedAddressBook
+    VersionedAddressBook --> Model :
+    deactivate VersionedAddressBook
+
+    Model -> Model : getFilteredPersonList()
+    activate Model
+    Model --> Model : filteredList
+    deactivate Model
+
+    [<- Model : "Seller added successfully"
+end
+
+deactivate Model
+@enduml

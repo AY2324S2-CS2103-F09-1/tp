@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User chooses to add home-seller;
+:EstateEase requests for the details of the home-seller;
+:User enters the requested details;
+
+if () then ([Details Missing or Invalid])
+    :Show error message;
+else ([Details Valid])
+    :EstateEase adds the home-seller;
+    :Displays the newly added home-seller;
+endif
+
+stop
+@enduml
