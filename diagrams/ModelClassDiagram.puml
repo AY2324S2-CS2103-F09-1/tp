@@ -29,7 +29,7 @@ Class Buyer extends Person
 Class Seller extends Person
 Class House
 Class Condo implements House
-Class HDB implements House
+Class Hdb implements House
 Class Landed implements House
 Class Budget
 
