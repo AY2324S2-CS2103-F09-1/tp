@@ -93,6 +93,17 @@ public class Hdb implements House {
     }
 
     /**
+     * Retrieves the housing type of the HDB.
+     *
+     * @return The housing type of the HDB.
+     */
+    @Override
+    public HousingType getHousingType() {
+        return new HousingType("Hdb");
+    }
+
+
+    /**
      * Checks if this house is equal to another object.
      *
      * @param other The object to compare to.

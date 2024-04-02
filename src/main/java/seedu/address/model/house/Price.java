@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a House's Price amount.
  * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
  */
-public class Price {
+public class Price implements Comparable<Price> {
     public static final String MESSAGE_CONSTRAINTS = "Price should be a positive number.";
     public static final String VALIDATION_REGEX = "\\d+(\\.\\d+)?";
     public final String value;
@@ -53,5 +53,12 @@ public class Price {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Price other) {
+        double thisValue = Double.parseDouble(this.value);
+        double otherValue = Double.parseDouble(other.value);
+        return Double.compare(thisValue, otherValue);
     }
 }

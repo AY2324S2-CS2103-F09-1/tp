@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.house.House;
+import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
@@ -188,6 +189,16 @@ class AddSellerCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

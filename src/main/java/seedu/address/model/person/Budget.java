@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.house.Price;
+
 /**
  * Represents a Buyer's budget in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidBudget(String)}
@@ -29,6 +31,15 @@ public class Budget {
      */
     public static boolean isValidBudget(String test) {
         return test.matches(VALIDATION_REGEX) && Double.parseDouble(test) >= 0;
+    }
+
+    /**
+     * Converts this budget to a Price.
+     *
+     * @return The Price equivalent of this budget.
+     */
+    public Price toPrice() {
+        return new Price(value);
     }
 
     @Override

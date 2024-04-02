@@ -67,6 +67,17 @@ public class Landed implements House {
     public Price getPrice() {
         return price;
     }
+
+    /**
+     * Retrieves the housing type of the landed house.
+     *
+     * @return The housing type of the landed house.
+     */
+    @Override
+    public HousingType getHousingType() {
+        return new HousingType("Landed");
+    }
+
     /**
      * Checks if this house is equal to another object.
      *

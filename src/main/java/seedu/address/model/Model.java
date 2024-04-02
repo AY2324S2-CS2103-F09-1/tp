@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.house.House;
+import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -115,4 +116,18 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filtered list of sellers based on the given price and housing type predicate.
+     *
+     * @param predicate The predicate to filter the sellers.
+     */
+    void updateFilteredSellerList(PriceAndHousingTypePredicate predicate);
+
+
+    /**
+     * Retrieves the filtered list of sellers.
+     * @return The filtered list of sellers.
+     */
+    public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate);
 }

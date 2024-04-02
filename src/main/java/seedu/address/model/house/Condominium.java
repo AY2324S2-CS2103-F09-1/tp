@@ -112,6 +112,16 @@ public class Condominium implements House {
     }
 
     /**
+     * Retrieves the housing type of the condominium.
+     *
+     * @return The housing type of the condominium.
+     */
+    @Override
+    public HousingType getHousingType() {
+        return new HousingType("Condominium");
+    }
+
+    /**
      * Checks if this house is equal to another object.
      *
      * @param other The object to compare to.

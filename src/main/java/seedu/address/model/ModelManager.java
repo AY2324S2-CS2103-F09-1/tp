@@ -4,16 +4,21 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.house.House;
+import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -157,6 +162,24 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person instanceof Seller && ((Seller) person).getHouses()
+                .stream().anyMatch(predicate));
+    }
+
+    @Override
+    public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+        FilteredList<Person> filteredSellers = filteredPersons.filtered(person -> person instanceof Seller);
+        ObservableList<House> allHouses = filteredSellers.stream()
+                .map(seller -> ((Seller) seller).getHouses())
+                .flatMap(Collection::stream)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        return allHouses.filtered(predicate);
     }
 
     @Override
