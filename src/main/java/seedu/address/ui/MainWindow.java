@@ -81,6 +81,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        this.primaryStage.setTitle("EstateEase");
     }
 
     public Stage getPrimaryStage() {
