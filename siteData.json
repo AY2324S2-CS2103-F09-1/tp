@@ -51,7 +51,9 @@
         "common-classes": "Common classes",
         "implementation": "Implementation",
         "proposed-edit-buyer-seller-feature": "[Proposed] Edit Buyer/Seller feature",
-        "proposed-matching-buyer-feature": "[Proposed] Matching Buyer feature",
+        "matching-sellers-to-a-buyer": "Matching Sellers to a Buyer",
+        "example-usage-scenario": "Example Usage Scenario:",
+        "design-considerations": "Design Considerations",
         "proposed-add-seller-feature": "[Proposed] Add seller feature",
         "proposed-add-house-feature": "[Proposed] Add House feature",
         "proposed-add-buyer-feature": "[Proposed] Add buyer feature",
@@ -67,7 +69,8 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
-        "loading-and-saving-data": "Loading and Saving Data"
+        "loading-and-saving-data": "Loading and Saving Data",
+        "matching-sellers-to-a-buyer-2": "Matching Sellers to a Buyer"
       },
       "headingKeywords": {}
     },
