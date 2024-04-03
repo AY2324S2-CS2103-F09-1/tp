@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -20,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.State;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private PersonDetailsPanel personDetailsPanel;
-
+    private MatchResultListPanel matchResultListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -62,6 +64,11 @@ public class MainWindow extends UiPart<Stage> {
     private VBox personDetails;
     @FXML
     private StackPane personDetailsPanelPlaceholder;
+
+    @FXML
+    private VBox matchResultList;
+    @FXML
+    private StackPane matchResultListPanelPlaceholder;
 
     @FXML
     private SplitPane contentBoxSplitPane;
@@ -142,9 +149,13 @@ public class MainWindow extends UiPart<Stage> {
         personDetailsPanel = new PersonDetailsPanel();
         personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
 
+        matchResultListPanel = new MatchResultListPanel();
+        matchResultListPanelPlaceholder.getChildren().add(matchResultListPanel.getRoot());
 
         personDetails.setVisible(false);
-        contentBoxSplitPane.getItems().removeAll(personDetails);
+        matchResultList.setVisible(false);
+
+        contentBoxSplitPane.getItems().removeAll(personDetails, matchResultList);
     }
 
     /**
@@ -199,6 +210,17 @@ public class MainWindow extends UiPart<Stage> {
         personDetailsPanel.setPersonDetails(person);
     }
 
+    /**
+     * Handles displaying match results from the matchBuyer command.
+     */
+    public void handleDisplayMatchResults(ObservableList<Seller> sellers) {
+        if (sellers == null) {
+            matchResultList.setVisible(false);
+        }
+        matchResultList.setVisible(true);
+        matchResultListPanel.setMatchResults(logic.getFilteredSellerList());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -234,7 +256,7 @@ public class MainWindow extends UiPart<Stage> {
      * Updates the ui layout for displaying.
      */
     public void updateUiLayout(State newState) {
-        contentBoxSplitPane.getItems().removeAll(personList, personDetails);
+        contentBoxSplitPane.getItems().removeAll(personList, personDetails, matchResultList);
         switch (newState) {
         case PERSON_LIST:
             contentBoxSplitPane.getItems().addAll(personList);
@@ -243,8 +265,7 @@ public class MainWindow extends UiPart<Stage> {
             contentBoxSplitPane.getItems().addAll(personList, personDetails);
             break;
         case MATCH_RESULTS:
-            // TODO to be updated
-            contentBoxSplitPane.getItems().addAll(personList);
+            contentBoxSplitPane.getItems().addAll(matchResultList);
             break;
         default:
             break;

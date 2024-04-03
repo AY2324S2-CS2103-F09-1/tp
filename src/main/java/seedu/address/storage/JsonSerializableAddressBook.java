@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.house.House;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
@@ -22,6 +23,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     private final List<JsonAdaptedSeller> sellers = new ArrayList<>();
     private final List<JsonAdaptedBuyer> buyers = new ArrayList<>();
+    private final List<JsonAdaptedHouse> houses = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -68,6 +70,9 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedSeller jsonAdaptedSeller : sellers) {
             Seller seller = jsonAdaptedSeller.toModelType();
             combinedList.add(seller);
+            for (House h: seller.getHouses()) {
+                addressBook.addHouseToHouses(h);
+            }
         }
 
         for (JsonAdaptedBuyer jsonAdaptedBuyer : buyers) {

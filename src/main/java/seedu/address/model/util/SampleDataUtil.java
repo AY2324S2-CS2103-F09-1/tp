@@ -81,6 +81,11 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Person person: getSamplePersons()) {
             sampleAb.addPerson(person);
+            if (person instanceof Seller) {
+                for (House h: ((Seller) person).getHouses()) {
+                    sampleAb.addHouseToHouses(h);
+                }
+            }
         }
         return sampleAb;
     }

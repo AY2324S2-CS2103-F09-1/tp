@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddHouseCommandParser" as AddHouseCommandParser LOGIC_COLOR
+participant "a:AddHouseCommand" as AddHouseCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addHouse n/John Doe type/Condominium \
+street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parse("addHouse n/John Doe type/Condominium \
+                                            street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+activate AddressBookParser
+
+create AddHouseCommandParser
+AddressBookParser -> AddHouseCommandParser
+activate AddHouseCommandParser
+
+AddHouseCommandParser --> AddressBookParser
+deactivate AddHouseCommandParser
+
+AddressBookParser -> AddHouseCommandParser : parse("addHouse n/John Doe type/Condominium \
+                                                    street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+activate AddHouseCommandParser
+
+create AddHouseCommand
+AddHouseCommandParser -> AddHouseCommand
+activate AddHouseCommand
+
+AddHouseCommand --> AddHouseCommandParser : a
+deactivate AddHouseCommand
+
+AddHouseCommandParser --> AddressBookParser: a
+deactivate AddHouseCommandParser
+
+AddHouseCommandParser -[hidden]-> AddressBookParser
+destroy AddHouseCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddHouseCommand : execute()
+activate AddHouseCommand
+
+AddHouseCommand -> Model : addHouse(house)
+activate Model
+
+Model --> AddHouseCommand
+deactivate Model
+
+create CommandResult
+AddHouseCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddHouseCommand
+deactivate CommandResult
+
+AddHouseCommand --> LogicManager : result
+deactivate AddHouseCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteHouseCommandParser" as DeleteHouseCommandParser LOGIC_COLOR
+participant "a:DeleteHouseCommand" as DeleteHouseCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deleteHouse n/John Doe type/Condominium \
+street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parse("deleteHouse n/John Doe type/Condominium \
+                                            street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+activate AddressBookParser
+
+create DeleteHouseCommandParser
+AddressBookParser -> DeleteHouseCommandParser
+activate DeleteHouseCommandParser
+
+DeleteHouseCommandParser --> AddressBookParser
+deactivate DeleteHouseCommandParser
+
+AddressBookParser -> DeleteHouseCommandParser : parse("deleteHouse n/John Doe type/Condominium \
+                                                    street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+activate DeleteHouseCommandParser
+
+create DeleteHouseCommand
+DeleteHouseCommandParser -> DeleteHouseCommand
+activate DeleteHouseCommand
+
+DeleteHouseCommand --> DeleteHouseCommandParser : a
+deactivate DeleteHouseCommand
+
+DeleteHouseCommandParser --> AddressBookParser: a
+deactivate DeleteHouseCommandParser
+
+DeleteHouseCommandParser -[hidden]-> AddressBookParser
+destroy DeleteHouseCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> DeleteHouseCommand : execute()
+activate DeleteHouseCommand
+
+DeleteHouseCommand -> Model : deleteHouse(house)
+activate Model
+
+Model --> DeleteHouseCommand
+deactivate Model
+
+create CommandResult
+DeleteHouseCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteHouseCommand
+deactivate CommandResult
+
+DeleteHouseCommand --> LogicManager : result
+deactivate DeleteHouseCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

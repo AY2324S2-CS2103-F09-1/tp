@@ -10,7 +10,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.house.House;
-import seedu.address.model.house.exceptions.DuplicateHouseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.InvalidSellerException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -46,7 +45,7 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Name toCheck) {
         requireNonNull(toCheck);
         for (Person p: internalList) {
-            if (p.getName().equals(toCheck)) {
+            if (p.getName().toString().equalsIgnoreCase(toCheck.toString())) {
                 return true;
             }
         }
@@ -60,7 +59,7 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toCheck);
         assert this.contains(toCheck) : "Person with this name must exist in AddressBook.";
         for (Person p: internalList) {
-            if (p.getName().equals(toCheck)) {
+            if (p.getName().toString().equalsIgnoreCase(toCheck.toString())) {
                 return p;
             }
         }
@@ -88,9 +87,10 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toAdd);
         if (!(owner instanceof Seller)) {
             throw new InvalidSellerException();
-        } else if (((Seller) owner).hasHouse(toAdd)) {
-            throw new DuplicateHouseException();
         }
+        /*else if (((Seller) owner).hasHouse(toAdd)) {
+            throw new DuplicateHouseException();
+        } */
         Seller seller = (Seller) owner;
         seller.addHouse(toAdd);
         remove(owner);

@@ -128,15 +128,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -144,7 +135,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both EstateEase data (including `Buyer`, `Seller`, and `House`) and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -178,13 +169,17 @@ there's a need to separate out the requirements accordingly.
 
 ### Matching Sellers to a Buyer
 
+#### Purpose
+
+The real estate agent may want to obtain all houses from sellers that match the buyer's preferences. For example, the real estate agent may want to gather all houses from sellers that align with a specified buyer's budget and preferred housing type.
+
 #### Implementation
 
-The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the buyer to be specified in the command input. Upon execution, the command retrieves the budget and preferred housing type of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
+1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the buyer to be specified in the command input. Upon execution, the command retrieves the budget and preferred housing type of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
 
-The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
+2. The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
 
-### Example Usage Scenario:
+#### Example Usage Scenario:
 
 **Step 1:** The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
 
@@ -197,7 +192,7 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
 
 <puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic"/>
 
-### Design Considerations
+#### Design Considerations
 
 * *Alternative 1 (current choice):* Use a new `MatchBuyerCommand` to do matching.
     * Pros:
@@ -216,71 +211,124 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
 
 ### \[Proposed\] Add seller feature
 
-#### Proposed Implementation
+#### Purpose
+This `addSeller` feature allows user to add a `Seller` and a `House` into the EstateEase
 
-The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
-This feature aims to facilitate the process of adding seller to EstateEase. Additionally, it implements the following operations:
-* `Seller#addHouse()` — Add a house to the seller list of houses.
-* `Seller#addHouse()` — Get a list of houses from the seller.
+#### Example Usage Scenario
+The following activity diagram summarizes what happens when a user executes the `addSeller` command
 
-Given below is an example usage scenario and how the add seller behaves at each step.
+<puml src="diagrams/AddSellerActivityDiagram.puml" width="350" />
 
-Step 1: The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
-
-Step 2: The user executes the `addSeller n/David ...` command to add one `Seller` and one `House` in the `AddressBook`.
-
-Step 3: After the user add `Seller` to EstateEase, it will then be displayed in the list of `Person`.
-
-**Note:** If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
-
+#### Implementation
 The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
 
 <puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" />
 
-Similarly, how an `addSeller` operation goes through the `Model` component:
+The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
+Additionally, it implements the following operations:
+* `Seller#addHouse()` — Add a house to the seller list of houses.
+* `Seller#removeHouse()` — Remove a list of houses from the seller.
+* `Seller#getHouses()` — Get a list of houses from the seller.
+* `Seller#hasHouse()` — Check if a house in a list of houses from the seller.
+* `Seller#copy()` — Values of the seller is copied to a new seller object.
 
-<puml src="diagrams/AddSellerSequenceDiagram-Model.puml" alt="AddSellerSequenceDiagram-Model" />
+**Details:**
+1. The `AddSellerCommand` class extends the `Command` class and is responsible for executing the add seller process. It expects the full name of the `Seller` and the full details of the `House` to be specified in the command input.
+2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
+3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
+4. The argument which contains a `Seller` and a `House` will then be parsed to `parse()` in `AddSellerCommandParser`.
+5. The `House` will then be checked at the `checkValidity()` in `AddHouseCommandParser`.
+6. If all the arguments for a `Seller` and a `House` is valid, it will then be parsed to the `AddSellerCommand`, where a constructor will be created.
+7. At the `AddSellerCommand`, it will check whether there is duplicate `Seller` in `Person`, `Seller` and `Buyer` cannot be the same `Person`. The `House` will also be checked to see whether it is a duplicate `House`, since the same `House` should not exist in the EstateEase data.
+8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Seller` object which contains the `Seller` details and `House` details. This object will then be used to update the `Model` through `addPerson()` method of model.
 
-Similarly, how an `addSeller` operation goes through the `Storage` component:
-
-<puml src="diagrams/AddSellerSequenceDiagram-Storage.puml" alt="AddSellerSequenceDiagram-Storage" />
-
-The following activity diagram summarizes what happens when a user executes the `addSeller` command
-
-<puml src="diagrams/AddSellerActivityDiagram.puml" width="250" />
+**Note:**
+- If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the `Person` has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+- If there is a duplicate `House` in the EstateEase, it will return an error to the user that the should `House` has existed. Each `House` is unique, and there should not be duplicates.
 
 #### Design Considerations
-
 **Aspect: How `addSeller` executes:**
 
 * **Alternative 1 (current choice):** Use a new command to add `Seller`.
-    * Pros: Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
-    * Cons: May lead to many commands, which is difficult for user to remember.
+    * **Pros:** Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * **Cons:** May lead to many commands, which is difficult for user to remember.
 
-* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`
-  itself.
-    * Pros: Having lesser commands is easier for the user to remember.
-    * Cons: Difficult to implement, having more prefixes means more validation.
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`.
+    * **Pros:** Having lesser commands is easier for the user to remember.
+    * **Cons:** Difficult to implement, having more prefixes means more validation.
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Add House feature
-
-#### Proposed Implementation
-
-The proposed add house mechanism allows user to add a House.
-Previously, AB3 does not have a House implementation. Given that buyers and sellers will need to have Houses
-associated, there is a need to for an add House feature.
-
-#### Implementation Details
-- Upon invoking the command `addSeller`, the system will take in the relevant arguments such as StreetName, Level
-- or UnitNumber.
-- The System will then create a House associated with the Seller.
-- The House will be linked to the Seller for all further commands.
-
 #### Why It's Implemented That Way
-- The add house function allows houses to be easily added alongside Sellers, making it more convenient as compared
-- to adding separately.
+- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+
+#### Adding Houses
+
+### Purpose
+
+The `AddHouse` Command is necessary to allow Houses to be added to Sellers.
+
+### Implementation
+
+The `AddHouseCommand` class extends the `Command` class and is responsible for executing the adding of a house to a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does not exist and the seller is valid, the house is added to the seller.
+
+The `AddHouseCommandParser` class is used to parse the user input and create the `AddHouseCommand` object. When executed by the `LogicManager`, the `AddHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
+
+### Example Usage Scenario:
+
+**Step 1:** The user launches the application. The `AddressBook` is assumed to already have the `Seller` John Doe.
+
+**Step 2:** The user executes the `addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ` command to add a `House` with these details to `AddressBook`.
+
+**Note:** If the `addHouse` command is used with a `Person` who is not a `Seller`, or with invalid house details, or to a nonexistent `Seller`, or an already existing `House`, an error message is displayed.
+
+
+The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
+
+<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic"/>
+
+### Design Considerations
+
+* *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
+    * Pros:
+        * Allows for only seller handling for houses and reduces overlap within classes
+        * Easier to track house logic as it will be contained within the seller
+    * Cons:
+        * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
+
+#### Deleting Houses
+
+### Purpose
+
+The `DeleteHouse` Command is necessary to delete Houses from relevant Sellers.
+
+### Implementation
+
+The `DeleteHouseCommand` class extends the `Command` class and is responsible for executing the deletion of a house from a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does exist and the seller is valid, the house is deleted from the seller.
+
+The `DeleteHouseCommandParser` class is used to parse the user input and create the `DeleteHouseCommand` object. When executed by the `LogicManager`, the `DeleteHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
+
+### Example Usage Scenario:
+
+**Step 1:** The user launches the application. The `AddressBook` is assumed to already have the `Seller` John Doe. John Doe is assumed to have a Condominium located at Clementi Ave 2, level 2 (with no block), unit number 25, postal code 578578 with price 99999.
+
+**Step 2:** The user executes the `deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ` command to delete a `House` with these details from `AddressBook` and John Doe's houses.
+
+**Note:** If the `deleteHouse` command is used with a `Person` who is not a `Seller`, or with invalid house details, or to a nonexistent `Seller`, or an already existing `House` not under the named `Seller`, an error message is displayed.
+
+
+The following sequence diagram shows how an `deleteHouse` operation goes through the `Logic` component:
+
+<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic"/>
+
+### Design Considerations
+
+* *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
+    * Pros:
+        * Allows for only seller handling for houses and reduces overlap within classes
+        * Easier to track house logic as it will be contained within the seller
+    * Cons:
+        * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
 
 
 ### \[Proposed\] Add buyer feature
@@ -444,8 +492,8 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 | Priority  | As a …​                     | I want to …​                                                                                  | So that I can…​                                                              |
 |-----------|-----------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| `* * * *` | real estate agent           | add home-owners clients                                                                       | keep track of their contact details and the properties that they are selling |
-| `* * * *` | real estate agent           | add home-buyer clients                                                                        | keep track of their contact details and requirements                         |
+| `* * * *` | real estate agent           | add home-sellers clients                                                                      | keep track of their contact details and the properties that they are selling |
+| `* * * *` | real estate agent           | add home-buyers clients                                                                       | keep track of their contact details and requirements                         |
 | `* * * *` | real estate agent           | view the list of all contacts stored                                                          | quickly find the contact I need                                              |
 | `* * * *` | real estate agent           | delete the contact that I want to remove                                                      | remove outdated or irrelevant contacts                                       |
 | `* * * *` | real estate agent           | be able to exit the program when I want to                                                    | close the application                                                        |
@@ -460,13 +508,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* *`     | busy real estate agent      | be able to view specific buyer's requirements                                                 | understand what are their needs quickly                                      |
 | `* *`     | busy real estate agent      | be able to view specific seller's properties                                                  | effectively assess their listings quickly                                    |
 | `* *`     | busy real estate agent      | be able to tell at a glance whether the contact is a buyer or seller                          | do not need to remember their identity                                       |
-| `* *`     | forgetful real estate agent | filter my contacts based on buyers who do not have a pending or done deal status              | easily identify and manage active buyer contacts                             |
-| `* *`     | forgetful real estate agent | link a buyer to sellers with the properties they are interested in buying                     | push them towards making a transaction                                       |
-| `*`       | busy real estate agent      | be able to add notes about clients when talking to them                                       | do not need to consolidate afterwards                                        |
-| `*`       | real estate agent           | differentiate between home-buyers who are looking for houses and finalizing a deal            | manage them effectively                                                      |
-| `*`       | real estate agent           | differentiate between home-sellers who are looking to sell their houses and finalizing a deal | manage them effectively                                                      |
-| `*`       | real estate agent           | see the priority of home-sellers after filtering out their selling requirements               | determine who I should prioritize in handling the transactions first         |
-
 
 ### Use cases
 
@@ -479,72 +520,26 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 1. User chooses to add home-seller.
 2. EstateEase requests for the details of the home-seller.
 3. User enters the requested details.
-4. EstateEase adds the home-seller and displays the newly added home-seller. <br>
+4. Include Use Case UC03 (Add house to home-seller) for the first house.
+4. EstateEase adds the home-seller and displays the newly added home-seller along with one house. <br>
    Use case ends.
 
-**Precondition for Extension 3g:** EstateEase has received the details of the home-seller from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the block number is missing when the house is HDB/Condo.
-
-**Precondition for Extension 3i and 3j:** EstateEase has received the details of the home-seller from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the unit number is missing when the house is HDB/Condo.
-
 **Extensions**
-
-* 3a. EstateEase detects missing name in the entered data. <br>
-    * 3a1. EstateEase shows an error message regarding missing name. <br>
-      Use case resumes from step 2.
-
-* 3b. EstateEase detects duplicate name in the entered data. <br>
-    * 3b1. EstateEase shows an error message regarding duplicate name. <br>
+* 3a. User enters an invalid command. <br>
+    * 3a1. EstateEase shows an error message. <br>
       Use case ends.
 
-* 3c. EstateEase detects missing phone number in the entered data. <br>
-    * 3c1. EstateEase shows an error message regarding missing phone number. <br>
-      Use case resumes from step 2.
+* 3b. User enters a home-seller that already exists. <br>
+    * 3b1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3d. EstateEase detects incorrect format for phone number in the entered data. <br>
-    * 3d1. EstateEase shows an error message regarding incorrect format for phone number. <br>
-      Use case resumes from step 2.
+* 3c. User does not enter a required field. <br>
+    * 3c1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3e. EstateEase detects missing email in the entered data. <br>
-    * 3e1. EstateEase shows an error message regarding missing email. <br>
-      Use case resumes from step 2.
-
-* 3f. EstateEase detects incorrect format for email in the entered data. <br>
-    * 3f1. EstateEase shows an error message regarding incorrect format for email. <br>
-      Use case resumes from step 2.
-
-* 3g. EstateEase detects missing block number in the entered data. <br>
-    * 3g1. EstateEase shows an error message regarding missing block number. <br>
-      Use case resumes from step 2.
-
-* 3h. EstateEase detects missing street name in the entered data. <br>
-    * 3h1. EstateEase shows an error message regarding missing street name. <br>
-      Use case resumes from step 2.
-
-* 3i. EstateEase detects missing unit number in the entered data. <br>
-    * 3i1. EstateEase shows an error message regarding missing unit number. <br>
-      Use case resumes from step 2.
-
-* 3j. EstateEase detects incorrect format for unit number in the entered data. <br>
-    * 3j1. EstateEase shows an error message regarding incorrect format for unit number. <br>
-      Use case resumes from step 2.
-
-* 3k. EstateEase detects missing postal code in the entered data. <br>
-    * 3k1. EstateEase shows an error message regarding missing postal code. <br>
-      Use case resumes from step 2.
-
-* 3l. EstateEase detects incorrect format for postal code in the entered data. <br>
-    * 3l1. EstateEase shows an error message regarding incorrect format for postal code. <br>
-      Use case resumes from step 2.
-
-* 3m. EstateEase detects missing house price in the entered data. <br>
-    * 3m1. EstateEase shows an error message regarding missing house price. <br>
-      Use case resumes from step 2.
-
-* 3n. EstateEase detects incorrect format for house price in the entered data. <br>
-    * 3n1. EstateEase shows an error message regarding incorrect format for house price. <br>
-      Use case resumes from step 2.
+* 3d. User enters an invalid value. <br>
+    * 3d1. EstateEase shows an error message. <br>
+      Use case ends.
 
 **Use case: UC02 - Add a home-buyer to contact list**
 
@@ -557,40 +552,23 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
    Use case ends.
 
 **Extensions**
-
-* 3a. EstateEase detects missing name in the entered data. <br>
-    * 3a1. EstateEase shows an error message regarding missing name. <br>
-      Use case resumes from step 2.
-
-* 3b. EstateEase detects duplicate name in the entered data. <br>
-    * 3b1. EstateEase shows an error message regarding duplicate name. <br>
+* 3a. User enters an invalid command. <br>
+    * 3a1. EstateEase shows an error message. <br>
       Use case ends.
 
-* 3c. EstateEase detects missing phone number in the entered data. <br>
-    * 3c1. EstateEase shows an error message regarding missing phone number. <br>
-      Use case resumes from step 2.
+* 3b. User enters a home-buyer that already exists. <br>
+    * 3b1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3d. EstateEase detects incorrect format for phone number in the entered data. <br>
-    * 3d1. EstateEase shows an error message regarding incorrect format for phone number. <br>
-      Use case resumes from step 2.
+* 3c. User does not enter a required field. <br>
+    * 3c1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3e. EstateEase detects missing email in the entered data. <br>
-    * 3e1. EstateEase shows an error message regarding missing email. <br>
-      Use case resumes from step 2.
+* 3d. User enters an invalid value. <br>
+    * 3d1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3f. EstateEase detects incorrect format for email in the entered data. <br>
-    * 3f1. EstateEase shows an error message regarding incorrect format for email. <br>
-      Use case resumes from step 2.
-
-* 3g. EstateEase detects incorrect format for interested housing type in the entered data. <br>
-    * 3g1. EstateEase shows an error message regarding incorrect format for interested housing type. <br>
-      Use case resumes from step 2.
-
-* 3g. EstateEase detects missing interested housing type in the entered data. <br>
-    * 3g1. EstateEase shows an error message regarding missing interested housing type. <br>
-      Use case resumes from step 2.
-
-**Use case: UC03 - Add more houses to home-seller**
+**Use case: UC03 - Add house to house-seller**
 
 **MSS:**
 
@@ -600,60 +578,30 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 4. EstateEase adds the new house and displays the newly added house of the home-seller. <br>
    Use case ends.
 
-**Precondition for Extension 3d:** EstateEase has received the details of the house from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the block number is missing when the house is HDB/Condo.
-
-**Precondition for Extension 3f and 3g:** EstateEase has received the details of the house from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the unit number is missing when the house is HDB/Condo.
-
 **Extensions**
-* 1a. The contact list does not have any home-seller. <br>
-    * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
+* 1a. The EstateEase list does not have any home-seller. <br>
+    * 1a1. EstateEase shows an error message. <br>
       Use case ends.
 
-* 3a. EstateEase detects missing name of the home-seller in the entered data. <br>
-    * 3a1. EstateEase shows an error message regarding missing name. <br>
-      Use case resumes from step 2.
-
-* 3b. EstateEase detects invalid name of the home-seller in the entered data. <br>
-    * 3b1. EstateEase shows an error message regarding invalid name. <br>
+* 3a. User enters duplicate house data. <br>
+    * 3a1. EstateEase shows an error message. <br>
       Use case ends.
 
-* 3c. EstateEase detects that the name does not belong to home-seller, but to home-buyer instead. <br>
-    * 3c1. EstateEase shows an error message regarding home can only be attached to home-seller, instead of home-buyer. <br>
-      Use case resumes from step 2.
+* 3b. User enters an invalid command. <br>
+    * 3b1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3d. EstateEase detects missing block number in the entered data. <br>
-    * 3d1. EstateEase shows an error message regarding missing block number. <br>
-      Use case resumes from step 2.
+* 3c. User does not enter the required field. <br>
+    * 3c1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3e. EstateEase detects missing street name in the entered data. <br>
-    * 3e1. EstateEase shows an error message regarding missing street name. <br>
-      Use case resumes from step 2.
+* 3d. User enters an invalid seller. <br>
+    * 3d1. EstateEase shows an error message. <br>
+      Use case ends.
 
-* 3f. EstateEase detects missing unit number in the entered data. <br>
-    * 3f1. EstateEase shows an error message regarding missing unit number. <br>
-      Use case resumes from step 2.
-
-* 3g. EstateEase detects incorrect format for unit number in the entered data. <br>
-    * 3g1. EstateEase shows an error message regarding incorrect format for unit number. <br>
-      Use case resumes from step 2.
-
-* 3h. EstateEase detects missing postal code in the entered data. <br>
-    * 3h1. EstateEase shows an error message regarding missing postal code. <br>
-      Use case resumes from step 2.
-
-* 3i. EstateEase detects incorrect format for postal code in the entered data. <br>
-    * 3i1. EstateEase shows an error message regarding incorrect format for postal code. <br>
-      Use case resumes from step 2.
-
-* 3j. EstateEase detects missing house price in the entered data. <br>
-    * 3j1. EstateEase shows an error message regarding missing house price. <br>
-      Use case resumes from step 2.
-
-* 3k. EstateEase detects incorrect format for house price in the entered data. <br>
-    * 3k1. EstateEase shows an error message regarding incorrect format for house price. <br>
-      Use case resumes from step 2.
+* 3e. User enters an invalid house. <br>
+    * 3e1. EstateEase shows an error message. <br>
+      Use case ends.
 
 **Use case: UC04 - View all contacts**
 
@@ -1083,3 +1031,5 @@ testers are expected to do more *exploratory* testing.
 
    2. **Test case:** `matchBuyer Lee`
       **Expected:** Message indicating invalid format. The specified buyer was not found.
+
+### Matching Sellers to a Buyer

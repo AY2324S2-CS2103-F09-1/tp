@@ -55,7 +55,7 @@ public class EditBuyerCommand extends Command {
 
     public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited Person(Buyer): %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This buyer already exists in EstateEase.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in EstateEase.";
     public static final String MESSAGE_WRONG_TYPE = "The person you are trying to edit is not a buyer.";
     private final Logger logger = LogsCenter.getLogger(EditBuyerCommand.class);
 

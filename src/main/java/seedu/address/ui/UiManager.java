@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -13,6 +14,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.State;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * The manager of the UI component.
@@ -91,6 +93,11 @@ public class UiManager implements Ui {
     @Override
     public void showPersonDetails(Person person) {
         mainWindow.handleViewPerson(person);
+    }
+
+    @Override
+    public void showMatchResults(ObservableList<Seller> sellers) {
+        mainWindow.handleDisplayMatchResults(sellers);
     }
 
     @Override

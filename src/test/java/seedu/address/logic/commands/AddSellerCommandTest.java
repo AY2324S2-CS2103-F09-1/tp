@@ -220,6 +220,11 @@ class AddSellerCommandTest {
         }
 
         @Override
+        public void showMatchResults(ObservableList<Seller> seller) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Person getPerson() {
             throw new AssertionError("This method should not be called.");
         }
@@ -235,7 +240,7 @@ class AddSellerCommandTest {
         }
 
         @Override
-        public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+        public ObservableList<House> getAllFilteredHouseList(PriceAndHousingTypePredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -244,7 +249,7 @@ class AddSellerCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        public ArrayList<Seller> getFilteredSeller() {
+        public ObservableList<Seller> getFilteredSellerList() {
             throw new AssertionError("This method should not be called.");
         }
     }

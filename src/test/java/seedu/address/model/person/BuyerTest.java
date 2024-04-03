@@ -42,9 +42,9 @@ public class BuyerTest {
         editedAli = new BuyerBuilder(ALI_BUYER).withName(VALID_NAME_BEN).build();
         assertFalse(ALI_BUYER.isSamePerson(editedAli));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBen = new BuyerBuilder(BEN_BUYER).withName(VALID_NAME_BEN.toLowerCase()).build();
-        assertFalse(BEN_BUYER.isSamePerson(editedBen));
+        assertTrue(BEN_BUYER.isSamePerson(editedBen));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BEN + " ";

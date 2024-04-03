@@ -59,7 +59,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
         phone.setText("Phone: " + displayedPerson.getPhone().value);
         email.setText("Email: " + displayedPerson.getEmail().value);
 
-
         if (displayedPerson instanceof Buyer) {
             budget.setVisible(true);
             housingType.setVisible(true);

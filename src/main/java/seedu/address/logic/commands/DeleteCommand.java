@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.State;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Deletes a person identified using it's displayed index from the displayed list.
@@ -44,7 +45,11 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.setState(State.PERSON_LIST);
 
-        model.deletePerson(personToDelete);
+        if (personToDelete instanceof Seller) {
+            model.deletePerson(personToDelete);
+        } else {
+            model.deletePersonFromPersons(personToDelete);
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

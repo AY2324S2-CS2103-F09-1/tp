@@ -70,14 +70,30 @@ public class JsonAdaptedHouse {
     }
 
     private void extractCondominiumDetails(Condominium condominium) {
-        this.block = condominium.getBlock() == null ? null : condominium.getBlock().value;
-        this.level = condominium.getLevel() == null ? null : condominium.getLevel().value;
+        if (condominium.getBlock() != null) {
+            this.block = condominium.getBlock().value;
+        } else {
+            this.block = null;
+        }
+        if (condominium.getLevel() != null) {
+            this.level = condominium.getLevel().value;
+        } else {
+            this.level = null;
+        }
         this.housingType = "Condominium";
     }
 
     private void extractHdbDetails(Hdb hdb) {
-        this.block = hdb.getBlock() == null ? null : hdb.getBlock().value;
-        this.level = hdb.getLevel() == null ? null : hdb.getLevel().value;
+        if (hdb.getBlock() != null) {
+            this.block = hdb.getBlock().value;
+        } else {
+            this.block = null;
+        }
+        if (hdb.getLevel() != null) {
+            this.level = hdb.getLevel().value;
+        } else {
+            this.level = null;
+        }
         this.housingType = "Hdb";
     }
 
@@ -128,19 +144,25 @@ public class JsonAdaptedHouse {
         }
         final Price modelPrice = new Price(price);
 
+        Block modelBlock = null;
+        Level modelLevel = null;
+
+        if (block != null) {
+            modelBlock = new Block(block);
+        }
+        if (level != null) {
+            modelLevel = new Level(level);
+        }
+
         switch (housingType.toLowerCase()) {
         case "condominium":
-            Block modelBlock = block != null ? new Block(block) : null;
-            Level modelLevel = level != null ? new Level(level) : null;
             if (modelBlock != null) {
                 return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber,
-                            modelBlock, modelPrice);
+                        modelBlock, modelPrice);
             } else {
                 return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelPrice);
             }
         case "hdb":
-            modelBlock = block != null ? new Block(block) : null;
-            modelLevel = level != null ? new Level(level) : null;
             return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock, modelPrice);
         case "landed":
             return new Landed(modelUnitNumber, modelPostalCode, modelStreet, modelPrice);

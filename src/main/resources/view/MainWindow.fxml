@@ -70,6 +70,13 @@
             <StackPane fx:id="personDetailsPanelPlaceholder"
                        VBox.vgrow="ALWAYS"/>
           </VBox>
+          <VBox fx:id="matchResultList" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <StackPane fx:id="matchResultListPanelPlaceholder"
+                       VBox.vgrow="ALWAYS"/>
+          </VBox>
         </SplitPane>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

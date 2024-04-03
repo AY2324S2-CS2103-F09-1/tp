@@ -1,39 +1,54 @@
 @startuml
 !include style.puml
-skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddSellerCommandParser" as AddSellerCommandParser LOGIC_COLOR
 participant "a:AddSellerCommand" as AddSellerCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-box Storage STORAGE_COLOR_T1
-participant ":Storage" as Storage STORAGE_COLOR
-end box
-
-[-> LogicManager : execute(addSeller ...)
+[-> LogicManager : execute(addSeller n/John Doe p/98765432 \n\
+e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 \n\
+level/02 unitNo/25 postal/578578 price/999999999)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(addSeller ...)
+LogicManager -> AddressBookParser : parse(addSeller n/John Doe p/98765432 \n\
+e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 \n\
+level/02 unitNo/25 postal/578578 price/999999999)
 activate AddressBookParser
 
-AddressBookParser -> AddSellerCommandParser : parse(arguments)
+create AddSellerCommandParser
+AddressBookParser -> AddSellerCommandParser
+activate AddSellerCommandParser
+
+AddSellerCommandParser --> AddressBookParser
+deactivate AddSellerCommandParser
+
+AddressBookParser -> AddSellerCommandParser : parse(n/John Doe p/98765432 \n\
+e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 \n\
+level/02 unitNo/25 postal/578578 price/999999999)
 activate AddSellerCommandParser
 
 create AddSellerCommand
 AddSellerCommandParser -> AddSellerCommand
 activate AddSellerCommand
 
-AddSellerCommandParser --> AddressBookParser
+AddSellerCommand --> AddSellerCommandParser
+deactivate AddSellerCommand
+
+AddSellerCommandParser --> AddressBookParser : a
 deactivate AddSellerCommandParser
 
-AddressBookParser --> LogicManager :
+AddSellerCommandParser -[hidden]-> AddressBookParser
+destroy AddSellerCommandParser
+
+AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
 LogicManager -> AddSellerCommand : execute()
@@ -45,15 +60,16 @@ activate Model
 Model --> AddSellerCommand
 deactivate Model
 
-LogicManager -> Storage : saveAddressBook(addressBook)
-activate Storage
+create CommandResult
+AddSellerCommand -> CommandResult
+activate CommandResult
 
-Storage --> LogicManager
-deactivate Storage
+CommandResult --> AddSellerCommand
+deactivate CommandResult
 
-AddSellerCommand --> LogicManager : result
+AddSellerCommand --> LogicManager : commandResult
 deactivate AddSellerCommand
 
-[<-- LogicManager : result
+[<-- LogicManager : commandResult
 deactivate LogicManager
 @enduml

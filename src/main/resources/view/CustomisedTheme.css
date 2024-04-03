@@ -19,3 +19,9 @@
 .details-card {
 
 }
+
+.test-3 {
+    -fx-background-color: derive(#D53B1A, 100%);
+    -fx-border-color: derive(#D53B1A, 100%);
+    -fx-border-top-width: 1px;
+}

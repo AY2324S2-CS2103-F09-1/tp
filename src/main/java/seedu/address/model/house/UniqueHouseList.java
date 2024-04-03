@@ -61,6 +61,8 @@ public class UniqueHouseList implements Iterable<House> {
             throw new DuplicateHouseException();
         }
         internalList.add(toAdd);
+
+        System.out.println(internalList.size());
     }
 
     /* WE KEEP THIS HERE IN CASE GOT EDITHOUSE YA
@@ -96,6 +98,13 @@ public class UniqueHouseList implements Iterable<House> {
         if (!internalList.remove(toRemove)) {
             throw new HouseNotFoundException();
         }
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<House> asUnmodifiableObservableListHouse() {
+        return internalUnmodifiableList;
     }
 
     /**

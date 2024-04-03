@@ -31,8 +31,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ObservableList<Seller> filteredSellers;
 
-    private final ArrayList<Seller> filteredSellers;
 
     private Ui ui = null;
     private State state = State.PERSON_LIST;
@@ -48,7 +48,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredSellers = new ArrayList<>();
+        filteredSellers = new FilteredList<>(FXCollections.observableArrayList());
     }
 
     public ModelManager() {
@@ -217,6 +217,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void showMatchResults(ObservableList<Seller> seller) {
+        requireNonNull(seller);
+        if (ui != null) {
+            ui.showMatchResults(filteredSellers);
+        }
+    }
+
+    @Override
     public Person getPerson() {
         return this.currentDisplayedPerson;
     }
@@ -226,10 +234,11 @@ public class ModelManager implements Model {
     public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
         requireNonNull(predicate);
         filteredSellers.clear();
+        ArrayList<Seller> temp = new ArrayList<>();
         filteredPersons.setPredicate(person -> {
             if (person instanceof Seller) {
                 Seller seller = ((Seller) person).copy();
-                ArrayList<House> houses = getFilteredHouses((Seller) person, predicate);
+                ObservableList<House> houses = getFilteredHousesForSeller((Seller) person, predicate);
 
                 if (houses.isEmpty()) {
                     return false;
@@ -239,30 +248,39 @@ public class ModelManager implements Model {
                 for (House house : houses) {
                     seller.addHouse(house);
                 }
-                filteredSellers.add(seller);
+                temp.add(seller);
+                filteredSellers = FXCollections.observableArrayList(temp);
                 return true;
             }
+
             return false;
         });
     }
+
     @Override
-    public ArrayList<Seller> getFilteredSeller() {
+    public ObservableList<Seller> getFilteredSellerList() {
         return filteredSellers;
     }
 
-    private ArrayList<House> getFilteredHouses(Seller seller, PriceAndHousingTypePredicate predicate) {
-        return seller.getHouses().stream()
-                .filter(predicate)
-                .collect(Collectors.toCollection(ArrayList::new));
+
+    private ObservableList<House> getFilteredHousesForSeller(Seller seller, PriceAndHousingTypePredicate predicate) {
+        ObservableList<House> originalHouseList = seller.getHouses();
+        FilteredList<House> filteredHouseList = new FilteredList<>(originalHouseList, predicate);
+
+        ObservableList<House> convertedList = FXCollections.observableArrayList();
+        convertedList.addAll(filteredHouseList);
+
+
+        return convertedList;
     }
+
     @Override
-    public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+    public ObservableList<House> getAllFilteredHouseList(PriceAndHousingTypePredicate predicate) {
         FilteredList<Person> filteredSellers = filteredPersons.filtered(person -> person instanceof Seller);
         ObservableList<House> allHouses = filteredSellers.stream()
                 .map(seller -> ((Seller) seller).getHouses())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
-
         return allHouses.filtered(predicate);
     }
 

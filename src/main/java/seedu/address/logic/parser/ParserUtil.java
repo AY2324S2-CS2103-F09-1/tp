@@ -141,7 +141,7 @@ public class ParserUtil {
         requireNonNull(houseType);
         String trimmedName = houseType.trim();
         if (!House.isValidName(trimmedName)) {
-            throw new ParseException(House.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HousingType.MESSAGE_CONSTRAINTS);
         }
         return new HousingType(trimmedName);
     }

@@ -36,7 +36,6 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
                         PREFIX_BUDGET);
 
         Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
