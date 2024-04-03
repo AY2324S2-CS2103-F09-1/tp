@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+skinparam participantFontSize 20
+skinparam arrowFontSize 16
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditBuyerCommandParser" as EditBuyerCommandParser LOGIC_COLOR
+participant ":EditBuyerDescriptor" as EditBuyerDescriptor LOGIC_COLOR
+participant "command:EditBuyerCommand" as EditBuyerCommand LOGIC_COLOR
+participant "editedBuyer:Buyer" as EditedBuyer LOGIC_COLOR
+participant "buyerToEdit:Buyer" as BuyerToEdit LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 n/John Doe")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit 1 n/John Doe")
+activate AddressBookParser
+
+create EditBuyerCommandParser
+AddressBookParser -> EditBuyerCommandParser
+activate EditBuyerCommandParser
+
+EditBuyerCommandParser --> AddressBookParser
+deactivate EditBuyerCommandParser
+
+AddressBookParser -> EditBuyerCommandParser : parse("1 n/John Doe")
+activate EditBuyerCommandParser
+
+create EditBuyerDescriptor
+EditBuyerCommandParser -> EditBuyerDescriptor
+activate EditBuyerDescriptor
+
+EditBuyerDescriptor --> EditBuyerCommandParser
+deactivate EditBuyerDescriptor
+
+create EditBuyerCommand
+EditBuyerCommandParser -> EditBuyerCommand
+activate EditBuyerCommand
+
+EditBuyerCommand --> EditBuyerCommandParser
+deactivate EditBuyerCommand
+
+EditBuyerCommandParser --> AddressBookParser : command
+deactivate EditBuyerCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> EditBuyerCommand : execute(model)
+activate EditBuyerCommand
+
+create EditedBuyer
+EditBuyerCommand -> EditedBuyer
+activate EditedBuyer
+EditedBuyer --> EditBuyerCommand
+deactivate EditedBuyer
+
+create BuyerToEdit
+EditBuyerCommand -> BuyerToEdit
+activate BuyerToEdit
+BuyerToEdit --> EditBuyerCommand
+deactivate BuyerToEdit
+
+EditBuyerCommand -> Model : setPerson(buyerToEdit, editedBuyer)
+activate Model
+
+Model --> EditBuyerCommand
+deactivate Model
+
+create CommandResult
+EditBuyerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditBuyerCommand
+deactivate CommandResult
+
+EditBuyerCommand --> LogicManager : commandResult
+deactivate EditBuyerCommand
+
+[<--LogicManager : commandResult
+deactivate LogicManager
+@enduml
