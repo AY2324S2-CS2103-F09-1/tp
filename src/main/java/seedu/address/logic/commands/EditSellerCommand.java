@@ -86,9 +86,10 @@ public class EditSellerCommand extends Command {
         if (!sellerToEdit.isSamePerson(editedSeller) && model.hasPerson(editedSeller)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.setState(State.PERSON_LIST);
+
         model.setPerson(sellerToEdit, editedSeller);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setState(State.PERSON_LIST);
         return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedSeller)));
     }
 

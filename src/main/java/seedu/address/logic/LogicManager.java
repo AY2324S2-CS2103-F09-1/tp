@@ -15,6 +15,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.State;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 import seedu.address.storage.Storage;
@@ -95,5 +96,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void setInitialUiState() {
+        model.setState(State.PERSON_LIST);
     }
 }

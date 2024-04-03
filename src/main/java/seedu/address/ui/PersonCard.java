@@ -43,11 +43,8 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
-    public PersonCard() {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
-    }
-
-    public void setPersonDetails(Person person, int displayedIndex) {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);

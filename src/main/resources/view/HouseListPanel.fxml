@@ -4,7 +4,12 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <Label styleClass="cell_big_label" text="Houses"/>
+    <Label styleClass="big-label" text="Houses">
+        <padding>
+            <Insets bottom="15"/>
+        </padding>
+    </Label>
     <ListView fx:id="houseListView" VBox.vgrow="ALWAYS" />
 </VBox>

@@ -7,13 +7,37 @@
 
 <VBox id="houseCard" fx:id="houseCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
-        <Insets top="5" right="5" bottom="5" left="15"/>
+        <Insets top="5" left="15" bottom="5" right="15"/>
     </padding>
-    <Label fx:id="postalCode" styleClass="cell_small_label" text="\$postalCode"/>
-    <Label fx:id="street" styleClass="cell_small_label" text="\$street"/>
-    <Label fx:id="unitNumber" styleClass="cell_small_label" text="\$unitNumber"/>
-    <Label fx:id="block" styleClass="cell_small_label" text="\$block"/>
-    <Label fx:id="level" styleClass="cell_small_label" text="\$level"/>
-    <Label fx:id="price" styleClass="cell_small_label" text="\$price"/>
+    <Label fx:id="postalCode" styleClass="small-label" text="\$postalCode">
+        <padding>
+            <Insets top="5"  bottom="5"/>
+        </padding>
+    </Label>
+    <Label fx:id="street" styleClass="small-label" text="\$street">
+        <padding>
+            <Insets top="5"  bottom="5"/>
+        </padding>
+    </Label>
+    <Label fx:id="unitNumber" styleClass="small-label" text="\$unitNumber">
+        <padding>
+            <Insets top="5"  bottom="5"/>
+        </padding>
+    </Label>
+    <Label fx:id="block" styleClass="small-label" text="\$block">
+        <padding>
+            <Insets top="5"  bottom="5"/>
+        </padding>
+    </Label>
+    <Label fx:id="level" styleClass="small-label" text="\$level">
+        <padding>
+            <Insets top="5"  bottom="5"/>
+        </padding>
+    </Label>
+    <Label fx:id="price" styleClass="small-label" text="\$price">
+        <padding>
+            <Insets top="5"  bottom="5"/>
+        </padding>
+    </Label>
 </VBox>
 

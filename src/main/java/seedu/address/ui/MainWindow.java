@@ -156,6 +156,7 @@ public class MainWindow extends UiPart<Stage> {
         matchResultList.setVisible(false);
 
         contentBoxSplitPane.getItems().removeAll(personDetails, matchResultList);
+
     }
 
     /**

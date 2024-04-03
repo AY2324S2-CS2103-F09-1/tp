@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -92,6 +93,7 @@ public class AddHouseCommand extends Command {
 
         try {
             model.addHouse(houseToAdd, sellerToAddTo);
+            model.setState(State.PERSON_LIST);
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
         }

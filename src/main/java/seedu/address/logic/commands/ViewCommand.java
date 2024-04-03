@@ -44,8 +44,8 @@ public class ViewCommand extends Command {
         assert targetIndex.getZeroBased() >= 0
                 : "Index should be a positive number";
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
-        model.setState(State.PERSON_DETAILS);
         model.showPerson(personToView);
+        model.setState(State.PERSON_DETAILS);
         return new CommandResult(
                 String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView.getName()));
     }

@@ -80,7 +80,7 @@ public class AddSellerCommand extends Command {
         if (model.hasPerson(sellerToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
-        model.setState(State.PERSON_LIST);
+
         model.addPerson(sellerToAdd);
 
         House houseToAdd = sellerToAdd.getHouses().get(0);
@@ -91,6 +91,7 @@ public class AddSellerCommand extends Command {
         }
 
         model.addHouseToHouses(houseToAdd);
+        model.setState(State.PERSON_LIST);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(sellerToAdd)));
     }
 

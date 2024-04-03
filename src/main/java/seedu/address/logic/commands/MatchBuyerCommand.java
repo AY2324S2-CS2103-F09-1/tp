@@ -49,8 +49,9 @@ public class MatchBuyerCommand extends Command {
             model.updateFilteredSellerList(predicate);
 
             ObservableList<House> filteredSellerList = model.getAllFilteredHouseList(predicate);
-            model.setState(State.MATCH_RESULTS);
+
             model.showMatchResults(model.getFilteredSellerList());
+            model.setState(State.MATCH_RESULTS);
 
             return new CommandResult(
                     String.format(Messages.MESSAGE_HOUSE_LISTED_OVERVIEW, filteredSellerList.size()));

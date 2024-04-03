@@ -43,13 +43,14 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.setState(State.PERSON_LIST);
+
 
         if (personToDelete instanceof Seller) {
             model.deletePerson(personToDelete);
         } else {
             model.deletePersonFromPersons(personToDelete);
         }
+        model.setState(State.PERSON_LIST);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

@@ -25,3 +25,21 @@
     -fx-border-color: derive(#D53B1A, 100%);
     -fx-border-top-width: 1px;
 }
+
+.big-label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 18px;
+    -fx-text-fill:#FFFFFF;
+}
+
+.medium-label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill:#FFFFFF;
+}
+
+.small-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill:#FFFFFF;
+}

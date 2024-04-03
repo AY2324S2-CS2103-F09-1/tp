@@ -188,8 +188,8 @@ public class ModelManager implements Model {
     }
 
     public void setState(State newState) {
-        boolean isStateChanged = isSameState(newState);
-        if (!isStateChanged) {
+        boolean isStateChanged = !isSameState(newState);
+        if (isStateChanged) {
             state = newState;
             if (ui != null) {
                 ui.updateUiLayout(newState);

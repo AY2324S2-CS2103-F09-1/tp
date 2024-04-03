@@ -62,8 +62,8 @@ public class AddBuyerCommand extends Command {
         if (model.hasPerson(buyerToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
-        model.setState(State.PERSON_LIST);
         model.addPerson(buyerToAdd);
+        model.setState(State.PERSON_LIST);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(buyerToAdd)));
     }
 
