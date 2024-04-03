@@ -3,14 +3,12 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
-:User chooses to add a house to a seller;
-:EstateEase requests for the details of the home-seller as well as the house;
-:User enters the requested details;
+:User enters add seller command;
 
-if () then ([Details Missing or Invalid])
-    :Show error message;
+if () then ([Seller and House Details Missing or Invalid])
+    :Parse exception thrown;
+    stop
 else ([Details Valid])
-    :EstateEase adds the house to the home-seller;
     :Displays the success message;
 endif
 
