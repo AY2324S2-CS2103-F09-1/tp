@@ -239,10 +239,10 @@ with(this){return _c('ol',[_c('li',[_c('p',[_v("The "),_c('code',{pre:true,attrs
 with(this){return _c('h4',{attrs:{"id":"example-usage-scenario-2"}},[_v("Example Usage Scenario:"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#example-usage-scenario-2","onclick":"event.stopPropagation()"}})])}
 },function anonymous(
 ) {
-with(this){return _c('p',[_c('strong',[_v("Step 1:")]),_v(" The user launches the application for the first time. The "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("AddressBook")]),_v(" will be initialized with the initial address book state (consisting of both "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Buyer")]),_v(" and "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Seller")]),_v(" details).")])}
+with(this){return _c('p',[_c('strong',[_v("Step 1:")]),_v(" The user launches the application for the first time. EstateEase will be initialized with the initial address book state (consisting of both "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Buyer")]),_v(" and "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Seller")]),_v(" details).")])}
 },function anonymous(
 ) {
-with(this){return _c('p',[_c('strong',[_v("Step 2:")]),_v(" The user executes the "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("matchBuyer Alice Lim")]),_v(" command to find and display "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Seller")]),_v(" details with "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("House")]),_v(" that match the preferences of the buyer named \"Alice Lim\" in the "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("AddressBook")]),_v(".")])}
+with(this){return _c('p',[_c('strong',[_v("Step 2:")]),_v(" The user executes the "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("matchBuyer Alice Lim")]),_v(" command to find and display "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Seller")]),_v(" details with "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("House")]),_v(" that match the preferences of the buyer named \"Alice Lim\" in the EstateEase.")])}
 },function anonymous(
 ) {
 with(this){return _c('p',[_c('strong',[_v("Note:")]),_v(" If the "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("matchBuyer")]),_v(" command is used without specifying the full name of a "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Buyer")]),_v(", it will return a message to the user indicating that the buyer does not exist.")])}
@@ -746,6 +746,6 @@ with(this){return _c('ul',[_c('li',[_v("List all persons using the "),_c('code',
 with(this){return _c('ol',[_c('li',[_c('strong',[_v("Invalid budget value")]),_c('br'),_v(" "),_c('strong',[_v("Test case:")]),_v(" "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("editBuyer 1 budget/-1")]),_c('br'),_v("\nExpected: An error message indicating that \"Budget should be a positive number.\"")]),_v(" "),_c('li',[_c('strong',[_v("Invalid preferred housing type")]),_c('br'),_v(" "),_c('strong',[_v("Test case:")]),_v(" "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("editBuyer 1 type/bungalow")]),_c('br'),_v("\nExpected: An error message indicating that \"HousingType should only be Landed, Hdb or Condominium.\"")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Thu, 4 Apr 2024, 23:03:35 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Thu, 4 Apr 2024, 23:33:27 GMT+8]")])])])}
 }];
   
