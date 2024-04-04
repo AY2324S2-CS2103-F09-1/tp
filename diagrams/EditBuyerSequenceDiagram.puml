@@ -1,17 +1,16 @@
 @startuml
 !include style.puml
 skinparam participantFontSize 20
-skinparam arrowFontSize 16
+skinparam arrowFontSize 18
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditBuyerCommandParser" as EditBuyerCommandParser LOGIC_COLOR
 participant ":EditBuyerDescriptor" as EditBuyerDescriptor LOGIC_COLOR
-participant "command:EditBuyerCommand" as EditBuyerCommand LOGIC_COLOR
-participant "editedBuyer:Buyer" as EditedBuyer LOGIC_COLOR
-participant "buyerToEdit:Buyer" as BuyerToEdit LOGIC_COLOR
-participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+participant "a:EditBuyerCommand" as EditBuyerCommand LOGIC_COLOR
+participant "new:Buyer" as EditedBuyer LOGIC_COLOR
+participant "b:CommandResult" as CommandResult LOGIC_COLOR
 
 end box
 
@@ -49,10 +48,10 @@ activate EditBuyerCommand
 EditBuyerCommand --> EditBuyerCommandParser
 deactivate EditBuyerCommand
 
-EditBuyerCommandParser --> AddressBookParser : command
+EditBuyerCommandParser --> AddressBookParser : a
 deactivate EditBuyerCommandParser
 
-AddressBookParser --> LogicManager : command
+AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
 LogicManager -> EditBuyerCommand : execute(model)
@@ -64,13 +63,7 @@ activate EditedBuyer
 EditedBuyer --> EditBuyerCommand
 deactivate EditedBuyer
 
-create BuyerToEdit
-EditBuyerCommand -> BuyerToEdit
-activate BuyerToEdit
-BuyerToEdit --> EditBuyerCommand
-deactivate BuyerToEdit
-
-EditBuyerCommand -> Model : setPerson(buyerToEdit, editedBuyer)
+EditBuyerCommand -> Model : setPerson(old, new)
 activate Model
 
 Model --> EditBuyerCommand
@@ -83,9 +76,9 @@ activate CommandResult
 CommandResult --> EditBuyerCommand
 deactivate CommandResult
 
-EditBuyerCommand --> LogicManager : commandResult
+EditBuyerCommand --> LogicManager : b
 deactivate EditBuyerCommand
 
-[<--LogicManager : commandResult
+[<--LogicManager : b
 deactivate LogicManager
 @enduml
