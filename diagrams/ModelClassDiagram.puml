@@ -59,8 +59,8 @@ House *--> PostalCode
 House *--> UnitNumber
 House *--> Street
 House *--> HousingType
-Seller *--> "1..*" House : sells
-Buyer *--> "*" House : buy
+Seller *--> "0..*" House : owns
+Buyer *--> "*" House : match
 Buyer *--> Budget
 
 

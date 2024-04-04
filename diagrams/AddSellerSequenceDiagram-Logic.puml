@@ -36,8 +36,7 @@ e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 \n\
 level/02 unitNo/25 postal/578578 price/999999999)
 activate AddSellerCommandParser
 
-AddSellerCommandParser -> AddHouseCommandParser : checkValidity(housingType, unitNumber, \n\
-street, postalCode, price, hasBlock, hasLevel, argMultimap)
+AddSellerCommandParser -> AddHouseCommandParser : checkValidity(...)
 activate AddHouseCommandParser
 
 AddHouseCommandParser --> AddSellerCommandParser
