@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes matchBuyer command;
+:Parameter is parsed by MatchBuyerCommandParser;
+if() then ([parameter is invalid])
+    :Display parse error message;
+else([parameter is valid])
+    :Create FullNameEqualsKeywordPredicate with keyword;
+    :MatchBuyerCommand is executed;
+    :Model update filtered seller list with predicate;
+    :Display list of sellers with matching houses;
+endif
+
+stop
+
+@enduml
