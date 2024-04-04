@@ -17,8 +17,7 @@ end box
 street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parse("addHouse n/John Doe type/Condominium \
-                                            street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+LogicManager -> AddressBookParser : parse(...)
 activate AddressBookParser
 
 create AddHouseCommandParser
@@ -28,8 +27,7 @@ activate AddHouseCommandParser
 AddHouseCommandParser --> AddressBookParser
 deactivate AddHouseCommandParser
 
-AddressBookParser -> AddHouseCommandParser : parse("addHouse n/John Doe type/Condominium \
-                                                    street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+AddressBookParser -> AddHouseCommandParser : parse(...)
 activate AddHouseCommandParser
 
 create AddHouseCommand
