@@ -128,6 +128,7 @@
         "adding-a-seller-addseller": "Adding a seller: addSeller",
         "adding-a-house-addhouse": "Adding a house: addHouse",
         "deleting-a-house-deletehouse": "Deleting a house: deleteHouse",
+        "matching-sellers-to-a-buyer-matchbuyer": "Matching Sellers to a Buyer: matchBuyer",
         "listing-all-persons-list": "Listing all persons : list",
         "editing-a-person-edit": "Editing a person : edit",
         "locating-persons-by-name-find": "Locating persons by name: find",
