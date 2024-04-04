@@ -1,0 +1,16 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes addBuyer command;
+
+if () then ([User provided correct parameters])
+:Buyer's name, phone, email, budget and preferredHousingType are parsed;
+#palegreen:New buyer is returned;
+stop
+else([User failed to provide correct parameters])
+#pink:EstateEase displays an error;
+end
+@enduml

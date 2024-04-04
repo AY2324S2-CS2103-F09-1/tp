@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddBuyerCommandParser" as AddBuyerCommandParser LOGIC_COLOR
+participant "a:AddBuyerCommand" as AddBuyerCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute(addBuyer n/James \n\
+p/98765432 e/james@gmail.com \n\
+budget/20000 type/HDB)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parse(addBuyer n/James \n\
+p/98765432 e/james@gmail.com \n\
+budget/20000 type/HDB)
+activate AddressBookParser
+
+create AddBuyerCommandParser
+AddressBookParser -> AddBuyerCommandParser
+activate AddBuyerCommandParser
+
+AddBuyerCommandParser --> AddressBookParser
+deactivate AddBuyerCommandParser
+
+AddressBookParser -> AddBuyerCommandParser : parse(n/James p/98765432 \n\
+e/james@gmail.com budget/20000 type/HDB)
+activate AddBuyerCommandParser
+
+create AddBuyerCommand
+AddBuyerCommandParser -> AddBuyerCommand
+activate AddBuyerCommand
+
+AddBuyerCommand --> AddBuyerCommandParser
+deactivate AddBuyerCommand
+
+AddBuyerCommandParser --> AddressBookParser : a
+deactivate AddBuyerCommandParser
+
+AddBuyerCommandParser -[hidden]-> AddressBookParser
+destroy AddBuyerCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddBuyerCommand : execute()
+activate AddBuyerCommand
+
+AddBuyerCommand -> Model : addBuyer(buyer)
+activate Model
+
+Model --> AddBuyerCommand
+deactivate Model
+
+create CommandResult
+AddBuyerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddBuyerCommand
+deactivate CommandResult
+
+AddBuyerCommand --> LogicManager : commandResult
+deactivate AddBuyerCommand
+
+[<-- LogicManager : commandResult
+deactivate LogicManager
+@enduml
+
