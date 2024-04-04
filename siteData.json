@@ -48,6 +48,7 @@
         "logic-component": "Logic component",
         "model-component": "Model component",
         "storage-component": "Storage component",
+        "malformed-jsons": "Malformed JSONs",
         "common-classes": "Common classes",
         "implementation": "Implementation",
         "edit-buyer": "Edit Buyer",
@@ -76,8 +77,7 @@
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
         "loading-and-saving-data": "Loading and Saving Data",
-        "matching-sellers-to-a-buyer-2": "Matching Sellers to a Buyer",
-        "matching-sellers-to-a-buyer-3": "Matching Sellers to a Buyer"
+        "matching-sellers-to-a-buyer-2": "Matching Sellers to a Buyer"
       },
       "headingKeywords": {}
     },
