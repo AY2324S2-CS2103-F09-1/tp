@@ -749,6 +749,6 @@ with(this){return _c('ul',[_c('li',[_v("List all persons using the "),_c('code',
 with(this){return _c('ol',[_c('li',[_c('strong',[_v("Invalid budget value")]),_c('br'),_v(" "),_c('strong',[_v("Test case:")]),_v(" "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("editBuyer 1 budget/-1")]),_c('br'),_v("\nExpected: An error message indicating that \"Budget should be a positive number.\"")]),_v(" "),_c('li',[_c('strong',[_v("Invalid preferred housing type")]),_c('br'),_v(" "),_c('strong',[_v("Test case:")]),_v(" "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("editBuyer 1 type/bungalow")]),_c('br'),_v("\nExpected: An error message indicating that \"HousingType should only be Landed, Hdb or Condominium.\"")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 8 Apr 2024, 21:01:42 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 8 Apr 2024, 21:59:32 GMT+8]")])])])}
 }];
   
