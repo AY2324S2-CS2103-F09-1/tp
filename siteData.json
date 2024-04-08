@@ -72,14 +72,17 @@
         "use-cases": "Use cases",
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
-        "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
+        "appendix-a-instructions-for-manual-testing": "Appendix A: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "viewing-the-details-of-a-person": "Viewing the details of a person",
         "deleting-a-person": "Deleting a person",
         "loading-and-saving-data": "Loading and Saving Data",
         "matching-sellers-to-a-buyer-2": "Matching Sellers to a Buyer",
         "editing-seller-details-2": "Editing Seller Details",
-        "editing-buyer-details": "Editing Buyer Details"
+        "editing-buyer-details": "Editing Buyer Details",
+        "appendix-b-proposed-enhancements": "Appendix B: Proposed enhancements",
+        "b-1-new-command-matchseller": "B.1 New Command: matchSeller",
+        "b-2-limit-price-and-budget-to-1-trillion": "B.2 Limit Price and Budget to 1 Trillion"
       },
       "headingKeywords": {}
     },
