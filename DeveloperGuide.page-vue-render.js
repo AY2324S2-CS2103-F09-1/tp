@@ -776,6 +776,6 @@ with(this){return _c('h4',{attrs:{"id":"b-2-2-implementation"}},[_v("B.2.2 Imple
 with(this){return _c('ol',[_c('li',[_v("Update the Price and Budget classes to enforce a maximum value of 1 trillion.")]),_v(" "),_c('li',[_v("Implement validation checks in the user interface to prevent users from entering values exceeding the limit.")]),_v(" "),_c('li',[_v("Provide clear error messages when users attempt to input values beyond the specified limit, guiding them to enter valid data.")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 8 Apr 2024, 22:06:38 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 8 Apr 2024, 23:20:39 GMT+8]")])])])}
 }];
   
