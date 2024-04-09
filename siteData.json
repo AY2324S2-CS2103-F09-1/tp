@@ -82,7 +82,9 @@
         "editing-buyer-details": "Editing Buyer Details",
         "appendix-b-proposed-enhancements": "Appendix B: Proposed enhancements",
         "b-1-new-command-matchseller": "B.1 New Command: matchSeller",
-        "b-2-limit-price-and-budget-to-1-trillion": "B.2 Limit Price and Budget to 1 Trillion"
+        "b-2-limit-price-and-budget-to-1-trillion": "B.2 Limit Price and Budget to 1 Trillion",
+        "b-3-add-seller-buyer-command": "B.3 Add Seller/Buyer command",
+        "b-4-phone-number-field": "B.4 Phone Number Field"
       },
       "headingKeywords": {}
     },
@@ -155,7 +157,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "estateease": "EstateEase"
       },
       "headingKeywords": {}
     },
