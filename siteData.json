@@ -83,9 +83,10 @@
         "appendix-b-proposed-enhancements": "Appendix B: Proposed enhancements",
         "b-1-new-command-matchseller": "B.1 New Command: matchSeller",
         "b-2-limit-price-and-budget-to-1-trillion": "B.2 Limit Price and Budget to 1 Trillion",
-        "b-3-restrict-landed-properties-to-a-unique-postal-code": "B.3 Restrict Landed Properties to a unique postal code",
-        "b-4-add-seller-buyer-command": "B.4 Add Seller/Buyer command",
-        "b-5-phone-number-field": "B.5 Phone Number Field"
+        "b-3-price-and-budget-2-decimal-places-only": "B.3 Price and Budget 2 Decimal Places Only",
+        "b-4-restrict-landed-properties-to-a-unique-postal-code": "B.4 Restrict Landed Properties to a unique postal code",
+        "b-5-add-seller-buyer-command": "B.5 Add Seller/Buyer command",
+        "b-6-phone-number-field": "B.6 Phone Number Field"
       },
       "headingKeywords": {}
     },
