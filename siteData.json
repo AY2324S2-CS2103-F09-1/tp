@@ -86,7 +86,9 @@
         "b-3-price-and-budget-2-decimal-places-only": "B.3 Price and Budget 2 Decimal Places Only",
         "b-4-restrict-landed-properties-to-a-unique-postal-code": "B.4 Restrict Landed Properties to a unique postal code",
         "b-5-add-seller-buyer-command": "B.5 Add Seller/Buyer command",
-        "b-6-phone-number-field": "B.6 Phone Number Field"
+        "b-6-phone-number-field": "B.6 Phone Number Field",
+        "b-7-edit-house-command": "B.7 Edit House Command",
+        "b-8-switch-all-index-based-commands-to-name-based-commands": "B.8 Switch all index based commands to name based commands"
       },
       "headingKeywords": {}
     },
@@ -167,7 +169,7 @@
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-estateease": "Project: EstateEase"
       },
       "headingKeywords": {}
     },
