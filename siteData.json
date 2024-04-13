@@ -133,6 +133,9 @@
       "title": "User Guide",
       "headings": {
         "estateease-user-guide": "EstateEase User Guide",
+        "key-features": "Key Features:",
+        "example-usages": "Example Usages:",
+        "acknowledgements": "Acknowledgements",
         "quick-start": "Quick start",
         "variable-constraints": "Variable Constraints",
         "features": "Features",
@@ -143,8 +146,8 @@
         "editing-seller-details-editseller": "Editing seller details : editSeller",
         "editing-buyer-details-editbuyer": "Editing buyer details : editBuyer",
         "adding-a-house-addhouse": "Adding a house: addHouse",
-        "deleting-a-house-deletehouse": "Deleting a house: deleteHouse",
         "matching-sellers-to-a-buyer-matchbuyer": "Matching Sellers to a Buyer: matchBuyer",
+        "deleting-a-house-deletehouse": "Deleting a house: deleteHouse",
         "listing-all-persons-list": "Listing all persons : list",
         "locating-persons-by-name-find": "Locating persons by name: find",
         "deleting-a-person-delete": "Deleting a person : delete",
@@ -153,7 +156,8 @@
         "saving-the-data": "Saving the data",
         "editing-the-data-file": "Editing the data file",
         "faq": "FAQ",
-        "command-summary": "Command summary"
+        "command-summary": "Command summary",
+        "glossary": "Glossary"
       },
       "headingKeywords": {}
     },

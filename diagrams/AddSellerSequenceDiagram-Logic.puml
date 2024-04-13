@@ -14,14 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(addSeller n/John Doe p/98765432 \n\
-e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 \n\
-level/02 unitNo/25 postal/578578 price/999999999)
+[-> LogicManager : execute(argumentA)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parse(addSeller n/John Doe p/98765432 \n\
-e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 \n\
-level/02 unitNo/25 postal/578578 price/999999999)
+LogicManager -> AddressBookParser : parse(argumentA)
 activate AddressBookParser
 
 create AddSellerCommandParser
@@ -31,12 +27,10 @@ activate AddSellerCommandParser
 AddSellerCommandParser --> AddressBookParser
 deactivate AddSellerCommandParser
 
-AddressBookParser -> AddSellerCommandParser : parse(n/John Doe p/98765432 \n\
-e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 \n\
-level/02 unitNo/25 postal/578578 price/999999999)
+AddressBookParser -> AddSellerCommandParser : parse(argumentB)
 activate AddSellerCommandParser
 
-AddSellerCommandParser -> AddHouseCommandParser : checkValidity(...)
+AddSellerCommandParser -> AddHouseCommandParser : checkValidity(argumentC)
 activate AddHouseCommandParser
 
 AddHouseCommandParser --> AddSellerCommandParser
