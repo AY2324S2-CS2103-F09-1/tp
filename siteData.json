@@ -134,6 +134,7 @@
       "headings": {
         "estateease-user-guide": "EstateEase User Guide",
         "quick-start": "Quick start",
+        "variable-constraints": "Variable Constraints",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
         "adding-a-buyer-addbuyer": "Adding a buyer: addBuyer",
@@ -152,7 +153,6 @@
         "saving-the-data": "Saving the data",
         "editing-the-data-file": "Editing the data file",
         "faq": "FAQ",
-        "known-issues": "Known issues",
         "command-summary": "Command summary"
       },
       "headingKeywords": {}
