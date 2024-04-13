@@ -12,9 +12,9 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-
-[-> LogicManager : execute("addHouse n/John Doe type/Condominium \
-street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+'@@author redcolorbicycle
+[-> LogicManager : execute("addHouse \nn/John Doe \ntype/Condominium \n\
+street/Clementi Ave 2 \nblk/N/A \nlevel/02 \nunitNo/25 \npostal/578578 \nprice/99999 ")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parse(...)
