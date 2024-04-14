@@ -13,11 +13,11 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("deleteHouse n/John Doe type/Condominium \
-street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ")
+[-> LogicManager : execute("deleteHouse \nn/John Doe \ntype/Condominium \n\
+street/Clementi Ave 2 \nblk/N/A \nlevel/02 unitNo/25 \npostal/578578 \nprice/99999 ")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parse(...)
+LogicManager -> AddressBookParser : parseCommand(...)
 activate AddressBookParser
 
 create DeleteHouseCommandParser
@@ -46,7 +46,7 @@ destroy DeleteHouseCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> DeleteHouseCommand : execute()
+LogicManager -> DeleteHouseCommand : execute(model)
 activate DeleteHouseCommand
 
 DeleteHouseCommand -> Model : deleteHouse(house)

@@ -14,10 +14,10 @@ participant ":Model" as Model MODEL_COLOR
 end box
 '@@author redcolorbicycle
 [-> LogicManager : execute("addHouse \nn/John Doe \ntype/Condominium \n\
-street/Clementi Ave 2 \nblk/N/A \nlevel/02 \nunitNo/25 \npostal/578578 \nprice/99999 ")
+street/Clementi Ave 2 \nblk/N/A \nlevel/02 unitNo/25 \npostal/578578 \nprice/99999 ")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parse(...)
+LogicManager -> AddressBookParser : parseCommand(...)
 activate AddressBookParser
 
 create AddHouseCommandParser
@@ -46,7 +46,7 @@ destroy AddHouseCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AddHouseCommand : execute()
+LogicManager -> AddHouseCommand : execute(model)
 activate AddHouseCommand
 
 AddHouseCommand -> Model : addHouse(house)

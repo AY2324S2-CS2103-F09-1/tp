@@ -6,7 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
 participant "a:ViewCommand" as ViewCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -16,7 +16,7 @@ end box
 [-> LogicManager : execute("view 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parse("view 1")
+LogicManager -> AddressBookParser : parseCommand("view 1")
 activate AddressBookParser
 
 create ViewCommandParser
@@ -33,7 +33,7 @@ create ViewCommand
 ViewCommandParser -> ViewCommand
 activate ViewCommand
 
-ViewCommand --> ViewCommandParser : a
+ViewCommand --> ViewCommandParser
 deactivate ViewCommand
 
 ViewCommandParser --> AddressBookParser: a
@@ -45,7 +45,7 @@ destroy ViewCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> ViewCommand : execute()
+LogicManager -> ViewCommand : execute(model)
 activate ViewCommand
 
 ViewCommand -> Model : showPerson(personToView)

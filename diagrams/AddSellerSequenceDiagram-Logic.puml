@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute(argumentA)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parse(argumentA)
+LogicManager -> AddressBookParser : parseCommand(argumentA)
 activate AddressBookParser
 
 create AddSellerCommandParser
@@ -52,7 +52,7 @@ destroy AddSellerCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AddSellerCommand : execute()
+LogicManager -> AddSellerCommand : execute(model)
 activate AddSellerCommand
 
 AddSellerCommand -> Model : addSeller(seller)

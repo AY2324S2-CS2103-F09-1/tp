@@ -16,12 +16,12 @@ end box
 
 [-> LogicManager : execute(addBuyer n/James \n\
 p/98765432 e/james@gmail.com \n\
-budget/20000 type/HDB)
+budget/20000 type/Hdb)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parse(addBuyer n/James \n\
+LogicManager -> AddressBookParser : parseCommand(addBuyer n/James \n\
 p/98765432 e/james@gmail.com \n\
-budget/20000 type/HDB)
+budget/20000 type/Hdb)
 activate AddressBookParser
 
 create AddBuyerCommandParser
@@ -32,7 +32,7 @@ AddBuyerCommandParser --> AddressBookParser
 deactivate AddBuyerCommandParser
 
 AddressBookParser -> AddBuyerCommandParser : parse(n/James p/98765432 \n\
-e/james@gmail.com budget/20000 type/HDB)
+e/james@gmail.com budget/20000 type/Hdb)
 activate AddBuyerCommandParser
 
 create AddBuyerCommand
@@ -51,7 +51,7 @@ destroy AddBuyerCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AddBuyerCommand : execute()
+LogicManager -> AddBuyerCommand : execute(model)
 activate AddBuyerCommand
 
 AddBuyerCommand -> Model : addBuyer(buyer)
