@@ -58,21 +58,28 @@ Person *--> "1" Phone
 Person *--> "1" Email
 '@@author KhoonSun47
 Person *--> "1" Tag
-House *--> "1" PostalCode
-House *--> "1" UnitNumber
+Hdb *--> "1" PostalCode
+Condominium *--> "1" PostalCode
+Landed *--> "1" PostalCode
+Hdb *--> "1" UnitNumber
+Condominium *--> "1" UnitNumber
+Landed *--> "1" UnitNumber
 '@@author felixchanyy
-House *--> "1" Street
-House *--> "1" Price
-House *--> "1" HousingType
-Condominium *--> "0..1" Block
+Hdb *--> "1" Street
+Condominium *--> "1" Street
+Landed *--> "1" Street
+Hdb *--> "1" Price
+Condominium *--> "1" Price
 '@@author zengzihui
+Landed *--> "1" Price
+Condominium *--> "0..1" Block
 Condominium *--> "1" Level
 Hdb *--> "1" Block
 Hdb *--> "1" Level
 '@@author redcolorbicycle
 Seller *--> "*" House : owns
 Buyer *--> "1" Budget
-Buyer ..> "1" HousingType : prefers
+Buyer *--> "      1" HousingType : prefers
 '@@author
 AddressBook *--> "1" UniqueHouseList
 UniqueHouseList --> "~* all" House
