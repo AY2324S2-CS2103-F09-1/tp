@@ -87,8 +87,9 @@
         "b-4-restrict-landed-properties-to-a-unique-postal-code": "B.4 Restrict Landed Properties to a Unique Postal Code",
         "b-5-add-seller-buyer-command": "B.5 Add Seller/Buyer command",
         "b-6-phone-number-field": "B.6 Phone Number Field",
-        "b-7-edit-house-command": "B.7 Edit House Command",
-        "b-8-switch-all-index-based-commands-to-name-based-commands": "B.8 Switch all Index Based Commands to Name Based Commands"
+        "b-7-display-person-details-after-addhouse-and-amp-deletehouse-command": "B.7 Display Person Details after AddHouse &amp; DeleteHouse Command",
+        "b-8-edit-house-command": "B.8 Edit House Command",
+        "b-9-switch-all-index-based-commands-to-name-based-commands": "B.9 Switch all Index Based Commands to Name Based Commands"
       },
       "headingKeywords": {}
     },
