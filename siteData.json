@@ -88,7 +88,8 @@
         "b-6-edit-house-command": "B.6 Edit House Command",
         "b-7-switch-all-name-based-commands-to-index-based-commands": "B.7 Switch all Name-Based Commands to Index-Based Commands",
         "b-8-unique-identifier-refinement": "B.8 Unique Identifier Refinement",
-        "b-9-display-person-details-after-addhouse-and-amp-deletehouse-command": "B.9 Display Person Details after AddHouse &amp; DeleteHouse Command"
+        "b-9-display-person-details-after-addhouse-and-amp-deletehouse-command": "B.9 Display Person Details after AddHouse &amp; DeleteHouse Command",
+        "b-10-fix-index-error-message": "B.10 Fix Index Error Message"
       },
       "headingKeywords": {}
     },
