@@ -85,11 +85,11 @@
         "b-2-limit-price-and-budget-to-1-trillion": "B.2 Limit Price and Budget to 1 Trillion",
         "b-3-price-and-budget-2-decimal-places-only": "B.3 Price and Budget 2 Decimal Places Only",
         "b-4-restrict-landed-properties-to-a-unique-postal-code": "B.4 Restrict Landed Properties to a Unique Postal Code",
-        "b-5-add-seller-buyer-command": "B.5 Add Seller/Buyer command",
-        "b-6-phone-number-field": "B.6 Phone Number Field",
-        "b-7-display-person-details-after-addhouse-and-amp-deletehouse-command": "B.7 Display Person Details after AddHouse &amp; DeleteHouse Command",
-        "b-8-edit-house-command": "B.8 Edit House Command",
-        "b-9-switch-all-index-based-commands-to-name-based-commands": "B.9 Switch all Index Based Commands to Name Based Commands"
+        "b-5-phone-number-field": "B.5 Phone Number Field",
+        "b-6-edit-house-command": "B.6 Edit House Command",
+        "b-7-switch-all-name-based-commands-to-index-based-commands": "B.7 Switch all Name-Based Commands to Index-Based Commands",
+        "b-8-unique-identifier-refinement": "B.8 Unique Identifier Refinement",
+        "b-9-display-person-details-after-addhouse-and-amp-deletehouse-command": "B.9 Display Person Details after AddHouse &amp; DeleteHouse Command"
       },
       "headingKeywords": {}
     },
