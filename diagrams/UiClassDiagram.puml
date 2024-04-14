@@ -3,6 +3,8 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam linetype polyline
+skinparam linetype ortho
 
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
@@ -15,6 +17,11 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class PersonDetailsPanel
+Class MatchResultListPanel
+Class MatchResultCard
+Class HouseListPanel
+Class HouseCard
 }
 
 package Model <<Rectangle>> {
@@ -33,23 +40,36 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *--> "1" PersonDetailsPanel
+MainWindow *--> "1" MatchResultListPanel
+MainWindow *--> "1" HouseListPanel
+
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+PersonListPanel ---> "*" PersonCard
+HouseListPanel ---> "*" HouseCard
+MatchResultListPanel ---> "*" MatchResultCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
+CommandBox --|> UiPart
 HelpWindow --|> UiPart
+PersonListPanel --|> UiPart
+PersonDetailsPanel --|> UiPart
+MatchResultListPanel --|> UiPart
+HouseListPanel --|> UiPart
+HouseCard -left-|> UiPart
+MatchResultCard -left-|> UiPart
+PersonCard -left-|> UiPart
 
 PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+HouseCard .down.> Model
+MatchResultCard ..> Model
+UiManager --> Logic
+MainWindow --> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox

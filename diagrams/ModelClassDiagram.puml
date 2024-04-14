@@ -8,6 +8,8 @@ Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
+Class "<<interface>>\nHouse" as House
+
 Class AddressBook
 Class ModelManager
 Class UserPrefs
@@ -19,16 +21,15 @@ Class Name
 Class Phone
 Class Tag
 Class PostalCode
-'@@author lokidoki102
+Class UniqueHouseList
 Class Street
 Class Level
 Class Block
-'@@author
+Class Price
 Class UnitNumber
 Class Buyer extends Person
 Class Seller extends Person
-Class House
-Class Condo implements House
+Class Condominium implements House
 Class Hdb implements House
 Class Landed implements House
 Class Budget
@@ -50,25 +51,37 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> "*" Tag
-House *--> PostalCode
-House *--> UnitNumber
-House *--> Street
-House *--> HousingType
-Seller *--> "0..*" House : owns
-Buyer *--> "*" House : match
-Buyer *--> Budget
-
+UniquePersonList --> "     ~* all" Person
+'@@author
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+'@@author KhoonSun47
+Person *--> "1" Tag
+House *--> "1" PostalCode
+House *--> "1" UnitNumber
+'@@author felixchanyy
+House *--> "1" Street
+House *--> "1" Price
+House *--> "1" HousingType
+Condominium *--> "0..1" Block
+'@@author zengzihui
+Condominium *--> "1" Level
+Hdb *--> "1" Block
+Hdb *--> "1" Level
+'@@author redcolorbicycle
+Seller *--> "*" House : owns
+Buyer *--> "1" Budget
+Buyer ..> "1" HousingType : prefers
+'@@author
+AddressBook *--> "1" UniqueHouseList
+UniqueHouseList --> "~* all" House
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 
-
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" House
 @enduml
